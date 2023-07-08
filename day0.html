@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day0</title>
+     <!-- Load libraries -->
+     <script src="./jspsych-7.3.1/jspsych.js"></script>
+
+     <!-- Initialize jsPsych -->
+     <script src="./self-report/init-jspsych.js"></script>
+   
+     <!-- Load jsPsych plug-ins -->
+
+     <script src="./self-report/plugin-survey-template copy.js"></script>
+     <script src="./self-report/plugin-survey-multi-choice.js"></script>
+     <script src="./self-report\surveys\plugin-survey-likert.js"></script>
+     <script src="./self-report\surveys\plugin-survey.js"></script>
+     <script src="./self-report/jquery-3.2.1.min.js"></script>
+     <script src="./jspsych-7.3.1/plugins/plugin-html-keyboard-response.js"></script>
+     <script src="./jspsych-7.3.1/plugins/plugin-survey-html-form.js"></script>
+     <!-- Load template surveys -->
+     <script src="./self-report/surveys/demographics.js"></script>
+     <script src="./self-report/surveys/selfclarity.js"></script>
+     <script src="./self-report/surveys/phq9.js"></script>
+     <script src="./self-report/surveys/gad7.js"></script>
+      <!-- Load CSS styles -->
+      <link href="./jspsych-7.3.1/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+
+    <head>
+      
+</head>
+<body>
+    
+</body>
+<script>
+
+  
+var timeline =[];
+var welcome = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `
+   <p>您好，欢迎参加本次实验。</p>
+   <p>为充分保障您的权利，请确保您已经知晓并同意《参与实验同意书》以及《数据公开知情同意书》。</p>
+   <p>如果您未见过上述内容，请咨询实验员。</p>
+   <p>如果您选择继续实验，则表示您已经清楚两份知情同意书的内容并同意。</p>
+   <p> <div style = "color: green"><按空格键至下页></div> </p>
+   `,
+  choices: [' '],
+};
+timeline.push(welcome);//设置欢迎语
+var info = [];
+var information = {
+  timeline: [{
+  type: jsPsychSurveyHtmlForm,
+  preamble: "<p style =' color : black'>您的姓名是</p>",
+  html: function () {
+    let data = localStorage.getItem(info["subj_idx"]) ? JSON.parse(localStorage.getItem(info["subj_idx"]))["Name"] : "";
+    return "<p><input name='Q0' type='text' value='" + data + "' required/></p>";
+  },
+
+  button_label: "继续",
+  on_finish: function (data) {
+    info["ID"] = data.response.Q0;}
+  }],}
+  
+  timeline.push(information);
+  
+  timeline.push(demog);
+  timeline.push(selfclarity);
+  timeline.push(phq);
+  timeline.push(gad);
+  jsPsych.run(timeline);
+
+
+</script>
+</html>

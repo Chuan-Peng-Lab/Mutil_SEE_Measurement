@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>day2</title>
+    <script src='./jspsych-7.3.1/js/jquery.js'></script>
+    <script src='./jspsych-7.3.1/jspsych.js'></script>
+    <script src="./self-report\surveys\plugin-survey.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-survey-text.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-survey-html-form.js"></script>  
+    <script src="./jspsych-7.3.1/plugins/plugin-survey-multi-choice.js"></script> 
+    <script src="./jspsych-7.3.1/plugins/plugin-survey-likert.js"></script>   
+    <script src="./jspsych-7.3.1/plugins/plugin-html-button-response.js"></script>  
+    <script src="./jspsych-7.3.1/plugins/plugin-html-keyboard-response.js"></script>  
+    <script src="./jspsych-7.3.1/plugins/plugin-image-keyboard-response.js"></script> 
+    <script src="./jspsych-7.3.1/plugins/plugin-video-keyboard-response.js"></script> 
+    <script src="./jspsych-7.3.1/plugins/plugin-audio-button-response.js"></script> 
+    <script src="./jspsych-7.3.1/plugins/plugin-preload.js"></script>  
+    <script src="./jspsych-7.3.1/plugins/plugin-video-slider-response.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-survey-multi-select.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-html-slider-response.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-fullscreen.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-call-function.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-virtual-chinrest.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-instructions.js"></script>
+    <script src="./self-report/plugin-survey-template.js"></script>
+    <link href="./jspsych-7.3.1/css/jspsych.css" rel="stylesheet" type="text/css">
+    <script src="./jspsych-psychophysics-3.4.0/jspsych-psychophysics.js"></script>
+    <script src="./jspsych-7.3.1/js/jSignature/jSignature.min.js"></script>
+    <script src="./jspsych-7.3.1/plugins/plugin-virtual-chinrest.js"></script>
+    <script src="./shuffle-seed.js"></script>
+    <script src="./shuffle-seed.min.js"></script>
+   
+    <script src="./jspsych-7.3.1\plugins/plugin-survey-likert.js"></script>
+   
+
+    <head>
+        <style>
+          body {
+            background-color: rgb(128, 128, 128);  /*背景灰色*/
+            color: white;
+            font-size: 25px;
+          }
+          p {
+            font-size: 25px;
+            line-height: 30px;
+          }
+        </style>
+      </head>
+ 
+</head>
+<body>
+    <script src=".\initJspsy2.js"></script>
+    <script src=".\self-report\surveys\SWB.js"></script>
+    <script src=".\self-report\surveys\LOT.js"></script>
+    <script src=".\ALT_2.js"></script>
+    <script src=".\SRET_eval.js"></script>
+    
+    <script src=".\self-report\surveys\moralidentity.js"></script>
+    <script src=".\self-report\surveys\moralSelf_image.js"></script>
+    <script src=".\self-report\surveys\sde.js"></script>
+    <script src=".\self-report\surveys\IM.js"></script>
+</body>
+<script>
+ 
+var timeline = [];
+timeline.push(SRET);
+
+timeline.push(welcome);
+timeline.push(information);
+timeline.push(preload);
+//timeline.push(chinrest);
+timeline.push(fullscreen_trial);
+timeline.push(swb);
+timeline.push(lot);
+
+timeline.push(SRET_end)
+timeline.push(ALT_2);
+
+timeline.push(moralidentity);
+timeline.push(moralSeImag);
+timeline.push(sde);
+timeline.push(IM);
+timeline.push(finish);
+jsPsych.run(timeline);
+
+</script>
+
+
+</html>
