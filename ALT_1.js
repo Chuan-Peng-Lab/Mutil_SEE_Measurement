@@ -96,8 +96,8 @@ var information = {
 
   button_label: "继续",
   on_finish: function (data) {
-    info["ID"] = data.response.Q0;
-    key = permutation(key, 2)[parseInt(info["ID"]) % 2] //对应的按键
+    info["subj_idx"] = data.response.Q0;
+    key = permutation(key, 2)[parseInt(info["subj_idx"]) % 2] //对应的按键
 
     view_texts_images = [] //指导语中呈现的图片和文字对应关系
     jsPsych.randomization.shuffle(images1).forEach((v, i) => { //将image随机
@@ -358,8 +358,13 @@ var Instructions0 = {
         {Image:images[2], word:words[2], identify:function(){return key[0]}},
         {Image:images[3], word:words[3], identify:function(){return key[0]}},
     ],
-    randomize_order:true,
-    repetitions:2,
+    sample:{
+      type:"custom",
+      fn:(x)=>{
+       return x.splice(0,alt1_sample)
+    }},
+    //randomize_order:true,
+    repetitions:alt1_n,//2次
     on_finish:function(){
         // $("body").css("cursor", "default"); //鼠标出现
     }
@@ -598,8 +603,13 @@ var feedback_goformal = {
     {Image:images[2], word:words[2], identify:function(){return key[0]}},
     {Image:images[3], word:words[3], identify:function(){return key[0]}},
 ],
-    randomize_order:true,
-    repetitions:2,//正是实验时改为6
+sample:{
+  type:"custom",
+  fn:(x)=>{
+   return x.splice(0,alt1_sample)
+}},
+    //randomize_order:true,
+    repetitions:alt1_n,//重复2次
     on_finish:function(){
         // $("body").css("cursor", "default"); //鼠标出现
     }
@@ -628,7 +638,7 @@ var feedback_goformal = {
   };
 
 
-  let blockTotalNum_same = 7;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2，此处为7
+  let blockTotalNum_same = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2，此处为7
 let rest_same = {
   type:jsPsychHtmlButtonResponse,
   stimulus: function () {
@@ -684,7 +694,7 @@ let rest_same = {
     p_gotosame,//进入正式实验的指导语
     {
         timeline: [same, feedback_block, rest_same],//48 trials的，先十字，刺激，反馈，数据；休息的反馈；结束休息的信号（休息1分钟）
-        repetitions: 8
+        repetitions: blockTotalNum_same+1
     },//
     cong_same//完成一个的结束语
 ];
@@ -844,8 +854,13 @@ var prac_s2 = {
       {Image:images[6], word:words[6], identify:function(){return key[0]}},
       {Image:images[7], word:words[7], identify:function(){return key[0]}},
   ],
-  randomize_order:true,
-  repetitions:2,
+  sample:{
+    type:"custom",
+    fn:(x)=>{
+     return x.splice(0,alt1_sample)
+  }},
+  //randomize_order:true,
+  repetitions:alt1_n,
   on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
   }
@@ -1082,12 +1097,17 @@ let same2 = {
       {Image:images[6], word:words[6], identify:function(){return key[0]}},
       {Image:images[7], word:words[7], identify:function(){return key[0]}},
 ],
-  randomize_order:true,
-  repetitions:2,//正是实验时改为6
+ sample:{
+   type:"custom",
+   fn:(x)=>{
+    return x.splice(0,alt1_sample)
+ }},
+  //randomize_order:true,
+  repetitions:alt1_n,
   on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
   }
-}
+};
 
 let feedback_block2 = {
   type: jsPsychHtmlKeyboardResponse,
@@ -1112,7 +1132,7 @@ let feedback_block2 = {
 };
 
 
-let blockTotalNum_same2 = 7;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2
+let blockTotalNum_same2 = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2
 let rest_same2 = {
 type:jsPsychHtmlButtonResponse,
 stimulus: function () {
@@ -1171,7 +1191,7 @@ var repeatblock2 = [
   p_gotosame2,
   {
       timeline: [same2, feedback_block2, rest_same2],
-      repetitions: 8
+      repetitions: blockTotalNum_same+1,
   },
   cong_same2
 ];
