@@ -1,9 +1,4 @@
-jsPsych.github.config({
-  owner: "Chenghao-Zhou", // the repo owner
-  repo: "Measuring_Pos_Self", // the repo to save the data
-  path: "/data/origin_day1", // the file path of the repo，每个实验都有一个
-  token:"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",
-})
+
 const jsPsych = initJsPsych({
     /* auto_update_progress_bar: true,
      extensions: {
@@ -38,4 +33,28 @@ const jsPsych = initJsPsych({
               }
             },
      });
-    
+     jsPsych.github.config({
+      owner: "Chenghao-Zhou", // the repo owner
+      repo: "Measuring_Pos_Self", // the repo to save the data
+      path: "/data/origin_day1", // the file path of the repo，每个实验都有一个
+      token:"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",
+    })
+
+    let debug = false;
+    let alt1_sample =24;//ALT1中12match+12mismatch
+    let  blockTotalNum_same=7;//ALT1正式实验重复组次数-1
+    let  alt1_n=2;//ALT1的24trials重复次数
+  
+       if (jsPsych.data.getURLVariable("debug")) {
+          version = "t3"
+          debug = true;
+          // 调试参数
+          alt1_sample =6;//ALT1中12match+12mismatch
+          blockTotalNum_same=1;//ALT1正式实验重复组次数-1
+          alt1_n=1;//ALT1的24trials重复次数
+  
+          iat_sample=6;
+          if (jsPsych.data.getURLVariable("auto")) {
+              auto(); // 自动运行，方便调试
+          }
+      } // 这玩意，只是为了方便调
