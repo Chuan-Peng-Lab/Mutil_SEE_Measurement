@@ -638,7 +638,7 @@ sample:{
   };
 
 
-  let blockTotalNum_same = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2，此处为7
+  let blockTotalNum = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2，此处为7
 let rest_same = {
   type:jsPsychHtmlButtonResponse,
   stimulus: function () {
@@ -646,7 +646,7 @@ let rest_same = {
         [{ correct: true }, { correct: false }]
       );
       return `
-                    <p>您当前还剩余${blockTotalNum_same}组实验</p>
+                    <p>您当前还剩余${blockTotalNum}组实验</p>
                     <p>现在是休息时间，当您结束休息后，您可以点击 结束休息 按钮 继续。</p>
                     <p>建议休息时间还剩余<span id="iii">60</span>秒</p>`
     },
@@ -664,7 +664,7 @@ let rest_same = {
     },
     on_finish: function () {
       $("body").css("cursor", "none"); //鼠标消失
-      blockTotalNum_same -= 1;
+      blockTotalNum -= 1;
       $(document.body).unbind();
       clearInterval(parseInt(sessionStorage.getItem("tmpInter")));
     }
@@ -1132,7 +1132,7 @@ let feedback_block2 = {
 };
 
 
-let blockTotalNum_same2 = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2
+let blockTotalNum_2 = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2
 let rest_same2 = {
 type:jsPsychHtmlButtonResponse,
 stimulus: function () {
@@ -1140,7 +1140,7 @@ stimulus: function () {
       [{ correct: true }, { correct: false }]
     );
     return `
-                  <p>您当前还剩余${blockTotalNum_same2}组实验</p>
+                  <p>您当前还剩余${blockTotalNum_2}组实验</p>
                   <p>现在是休息时间，当您结束休息后，您可以点击 结束休息 按钮 继续。</p>
                   <p>建议休息时间还剩余<span id="iii">60</span>秒</p>`
   },
@@ -1158,7 +1158,7 @@ stimulus: function () {
   },
   on_finish: function () {
     $("body").css("cursor", "none"); //鼠标消失
-    blockTotalNum_same2 -= 1;
+    blockTotalNum_2 -= 1;
     $(document.body).unbind();
     clearInterval(parseInt(sessionStorage.getItem("tmpInter")));
   }
