@@ -459,10 +459,15 @@ function zip(arrays) {
 // ITI设置trial间间隔，刺激自动呈现，'categorize-html'plugin设置按键后的反馈
 
 
-function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func,iat_sample,iti = 250) {
-    var stimuliSubset = iat_sample > 0 ? stimuli.slice(0, iat_sample) : stimuli;
+function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func,iti = 250) {
+   
     var IAT = {
-        timeline_variables: toStimuli(stimuliSubset),
+        timeline_variables: toStimuli(stimuli),
+        sample:{
+            type:"custom",
+            fn:(x)=>{
+             return x.splice(0, iat_sample)//
+          }},
         timeline: [{
             type: jsPsychHtmlKeyboardResponse,
             stimulus: '',
@@ -483,7 +488,8 @@ function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func,iat
             show_stim_with_feedback: true,
             force_correct_button_press: true,
             on_finish: function(data) { data.RT = data.rt } // for computing IAT D-score in feedback
-        }]
+        }],
+
     }
     return IAT
 }
@@ -509,8 +515,8 @@ function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func,iat
 var IAT1 = blockTemplateIAT(
     block_id = 1,
     tag = tag_IAT_prac_target_1,
-    iat_sample= 12,
-    stimuli = generateRandomTrials(12, [].concat(iat.targetA.items, iat.targetB.items)),
+    
+     stimuli = generateRandomTrials(12, [].concat(iat.targetA.items, iat.targetB.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
         return `<p style="color:${target_color}; font-size: 35px;">${stim}</p>`
@@ -519,14 +525,15 @@ var IAT1 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if (iat.targetA.items.includes(stim)) { return keyCode(key_L) }
         if (iat.targetB.items.includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1,
 )
 
 // Practice blocks2:attribute 出现1次，共12个；6个iat.attribA.items, 6个iat.attribB.items
 var IAT2 = blockTemplateIAT(
     block_id = 2,
     tag = tag_IAT_prac_attrib,
-    iat_sample= 12,
+    //iat_sample= 12,
     stimuli = generateRandomTrials(12, [].concat(iat.attribA.items, iat.attribB.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -536,14 +543,14 @@ var IAT2 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if (iat.attribA.items.includes(stim)) { return keyCode(key_L) }
         if (iat.attribB.items.includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1,
 )
 
 // Practice blocks3:combine1 出现1次，共24个；12个target, 12个attrib
 var IAT3 = blockTemplateIAT(
     block_id = 3,
     tag = tag_IAT_test_1,
-    iat_sample= 24,
     stimuli = zip([iat.targetA.items, iat.attribA.items, iat.targetB.items, iat.attribB.items]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -558,14 +565,14 @@ var IAT3 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat.targetA.items, iat.attribA.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat.targetB.items, iat.attribB.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*2,
 )
 
 // Test blocks4:combine1 出现2次，共48个；24个target, 24个attrib
 var IAT4 = blockTemplateIAT(
     block_id = 4,
     tag = tag_IAT_test_1,
-    iat_sample= 48,
     stimuli = zip([generateRandomTrials(12,iat.targetA.items), generateRandomTrials(12,iat.attribA.items), generateRandomTrials(12,iat.targetB.items), generateRandomTrials(12,iat.attribB.items)]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -580,14 +587,14 @@ var IAT4 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat.targetA.items, iat.attribA.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat.targetB.items, iat.attribB.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*4,
 )
 
 // Practice blocks5:target（re,反向按键） 出现2次，共24个；12个iat.targetA.items, 12个iat.targetB.items
 var IAT5 = blockTemplateIAT(
     block_id = 5,
     tag = tag_IAT_prac_target_2,
-    iat_sample = 24,
     stimuli = generateRandomTrials(24, [].concat(iat.targetB.items, iat.targetA.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -597,14 +604,15 @@ var IAT5 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if (iat.targetB.items.includes(stim)) { return keyCode(key_L) }
         if (iat.targetA.items.includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*2,
 )
 
 // Test blocks6:combine2 出现1次，共24个；12个target(re), 12个attrib
 var IAT6 = blockTemplateIAT(
     block_id = 6,
     tag = tag_IAT_test_2,
-    iat_sample= 24,
+   // iat_sample= 24,
    /*stimuli = crossArrays(
         generateRandomTrials(12, [].concat(iat.attribA.items, iat.attribB.items)),
         generateRandomTrials(12, [].concat(iat.targetB.items, iat.targetA.items)),
@@ -624,14 +632,15 @@ var IAT6 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat.attribA.items, iat.targetB.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat.attribB.items, iat.targetA.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*2,
 )
 
 // Test blocks7:combine2 出现2次，共48个；24个target(re), 24个attrib
 var IAT7 = blockTemplateIAT(
     block_id = 7,
     tag = tag_IAT_test_2,
-    iat_sample = 48,
+   // iat_sample = 48,
     /*stimuli = crossArrays(
         generateRandomTrials(24, [].concat(iat.attribA.items, iat.attribB.items)),
         generateRandomTrials(24, [].concat(iat.targetB.items, iat.targetA.items)),
@@ -651,7 +660,8 @@ var IAT7 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat.attribA.items, iat.targetB.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat.attribB.items, iat.targetA.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*4,
 )
 
 
@@ -952,8 +962,7 @@ var IAT_instr07 = {
 
 var IAT11 = blockTemplateIAT(
     block_id = 11,
-    tag = tag_IAT_prac_target_01,
-    iat_sample= 12,
+    tag = tag_IAT_prac_target_01,  
     stimuli = generateRandomTrials(12, [].concat(iat2.targetA.items, iat2.targetB.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -963,13 +972,13 @@ var IAT11 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if (iat2.targetA.items.includes(stim)) { return keyCode(key_L) }
         if (iat2.targetB.items.includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1,
 )
 
 var IAT12 = blockTemplateIAT(
     block_id = 12,
     tag = tag_IAT_prac_attrib2,
-    iat_sample= 12,
     stimuli = generateRandomTrials(12, [].concat(iat2.attribC.items, iat2.attribD.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -979,7 +988,8 @@ var IAT12 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if (iat2.attribC.items.includes(stim)) { return keyCode(key_L) }
         if (iat2.attribD.items.includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1,
 )
 
 var IAT13 = blockTemplateIAT(
@@ -989,7 +999,7 @@ var IAT13 = blockTemplateIAT(
         generateRandomTrials(12, [].concat(iat2.targetA.items, iat2.targetB.items)),
         generateRandomTrials(12, [].concat(iat2.attribC.items, iat2.attribD.items)),
     ),*/
-    iat_sample= 24,
+   // iat_sample= 24,
     stimuli = zip([iat2.targetA.items, iat2.attribC.items, iat2.targetB.items, iat2.attribD.items]),
 
     stim_func = function() {
@@ -1005,7 +1015,8 @@ var IAT13 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat2.targetA.items, iat2.attribC.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat2.targetB.items, iat2.attribD.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*2,
 )
 
 var IAT14 = blockTemplateIAT(
@@ -1015,7 +1026,6 @@ var IAT14 = blockTemplateIAT(
         generateRandomTrials(24, [].concat(iat2.targetA.items, iat2.targetB.items)),
         generateRandomTrials(24, [].concat(iat2.attribC.items, iat2.attribD.items)),
     ),*/
-    iat_sample= 48,
     stimuli = zip([generateRandomTrials(12,iat2.targetA.items), generateRandomTrials(12,iat2.attribC.items), generateRandomTrials(12,iat2.targetB.items), generateRandomTrials(12, iat2.attribD.items)]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -1030,13 +1040,13 @@ var IAT14 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat2.targetA.items, iat2.attribC.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat2.targetB.items, iat2.attribD.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*4,
 )
 
 var IAT15 = blockTemplateIAT(
     block_id = 15,
     tag = tag_IAT_prac_target_02,
-    iat_sample= 24,
     stimuli = generateRandomTrials(24, [].concat(iat2.targetB.items, iat2.targetA.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -1046,7 +1056,8 @@ var IAT15 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if (iat2.targetB.items.includes(stim)) { return keyCode(key_L) }
         if (iat2.targetA.items.includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*2,
 )
 
 var IAT16 = blockTemplateIAT(
@@ -1056,7 +1067,6 @@ var IAT16 = blockTemplateIAT(
         generateRandomTrials(12, [].concat(iat2.attribC.items, iat2.attribD.items)),
         generateRandomTrials(12, [].concat(iat2.targetB.items, iat2.targetA.items)),
     ),*/
-    iat_sample= 24,
     stimuli = zip([iat2.attribC.items, iat2.targetB.items, iat2.attribD.items, iat2.targetA.items]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -1071,7 +1081,8 @@ var IAT16 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat2.attribC.items, iat2.targetB.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat2.attribD.items, iat2.targetA.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*2,
 )
 
 var IAT17 = blockTemplateIAT(
@@ -1081,7 +1092,6 @@ var IAT17 = blockTemplateIAT(
         generateRandomTrials(24, [].concat(iat2.attribC.items, iat2.attribD.items)),
         generateRandomTrials(24, [].concat(iat2.targetB.items, iat2.targetA.items)),
     ),*/
-    iat_sample= 48,
     stimuli = zip([generateRandomTrials(12,iat2.attribC.items), generateRandomTrials(12,iat2.targetB.items), generateRandomTrials(12,iat2.attribD.items), generateRandomTrials(12, iat2.targetA.items)]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -1096,7 +1106,8 @@ var IAT17 = blockTemplateIAT(
         var stim = jsPsych.timelineVariable('s', true)
         if ([].concat(iat2.attribC.items, iat2.targetB.items).includes(stim)) { return keyCode(key_L) }
         if ([].concat(iat2.attribD.items, iat2.targetA.items).includes(stim)) { return keyCode(key_R) }
-    }
+    },
+    iat_sample= iat_sample1*4,
 )
 
 /* Blocks: Feedbacks */
