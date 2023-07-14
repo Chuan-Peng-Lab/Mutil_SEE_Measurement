@@ -305,7 +305,7 @@ var all_words = [
  
 
 ];
-
+//4 for ew_exercise, 4 old+ 4 new for rj_exercise,4 head+ 4 tail for ew_exercise
 var EW_exercise_words =[
   { Words: "严谨", Domain: "ability", Valence: "Positive" , person: '自己'},
   { Words: "刻板", Domain: "ability", Valence: "Negative", person: '自己' },
@@ -500,7 +500,6 @@ var RJ_formal_words =jsPsych.randomization.shuffle(assignPersonProperties(RJ_for
 //-----------------------------------------------
 for (var i = 0; i < RJ_formal_words.length; i++) {
   var foundMatch = false;
-  
   for (var j = 0; j < EW_words.length; j++) {
     if (RJ_formal_words[i].Words === EW_words[j].Words) {
       RJ_formal_words[i].identity = "old";
@@ -508,7 +507,6 @@ for (var i = 0; i < RJ_formal_words.length; i++) {
       break;
     }
   }
-  
   if (!foundMatch) {
     RJ_formal_words[i].identity = "new";
   }
@@ -517,15 +515,32 @@ for (var i = 0; i < EW_words.length; i++) {
   EW_words[i].identity = "old";
 }
 //------------------------------------------------
-
+for (var i = 0; i < RJ_exercise_words.length; i++) {
+  var foundMatch = false;
+  for (var j = 0; j < EW_exercise_words.length; j++) {
+    if (RJ_exercise_words[i].Words === EW_exercise_words[j].Words) {
+      RJ_exercise_words[i].identity = "old";
+      foundMatch = true;
+      break;
+    }
+  }
+  if (!foundMatch) {
+    RJ_exercise_words[i].identity = "new";
+  }
+}
+for (var i = 0; i < EW_exercise_words.length; i++) {
+  EW_exercise_words[i].identity = "old";
+}
+//-----------------------------------------------
 var EW_practice_instructions = {
   type: jsPsychHtmlButtonResponse,      
   stimulus: `<div style="width:700px;">
     <p style='color:white;font-size:45px; line-height:30px;'>词汇评估任务</p>
     <p style='color:white;font-size:25px; line-height:30px;'><b>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。</b></p>
     <p style='color:white;font-size:25px; line-height:30px;'>在本实验中，您将会看到一些形容词。</p>
-    <p style='color:yellow;font-size:25px; line-height:30px;'>您的任务是判断这些形容词是否符合对您自己或您的朋友的描述。</p>
-    </div>`,
+    <p style='color:yellow;font-size:25px; line-height:30px;'>您的任务是判断这些形容词是否符合对您自己或您的朋友的描述。</p></div>`+
+    `符合按 ${key[0]} 键，不符合按 ${key[1]} 键`//fixme:此处按键始终为key[0]=f, key[1]=j
+    ,
   choices: ['继续'],
   data: {
       task_id: "EW_practice", 
@@ -580,7 +595,7 @@ type:jsPsychPsychophysics,
           content: function(){return jsPsych.timelineVariable('Words',true)},         
           startX: "center",
           startY: "center", 
-          font: `${40}px '微软雅黑'`, //字体和颜色设置 文字视角：3.6° x 1.6°
+          font: `${50}px '微软雅黑'`, //字体和颜色设置 文字视角：3.6° x 1.6°
           text_color: 'white',
           show_start_time: 1000, // ms after the start of the trial
           //show_end_time: 2000,//出现1000ms
@@ -617,7 +632,7 @@ type:jsPsychPsychophysics,
 },
     ],
         timeline_variables:EW_exercise_words,
-        randomize_order:true,
+       randomize_order:true,       
         repetitions:1,
         on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
@@ -683,7 +698,7 @@ var EW_formal = {
           content: function(){return jsPsych.timelineVariable('Words',true)},         
           startX: "center",
           startY: "center", 
-          font: `${40}px '微软雅黑'`, //字体和颜色设置 文字视角：3.6° x 1.6°
+          font: `${50}px '微软雅黑'`, //字体和颜色设置 文字视角：3.6° x 1.6°
           text_color: 'white',
           show_start_time: 1000, // ms after the start of the trial
           //show_end_time: 2000,//出现1000ms
@@ -721,7 +736,12 @@ var EW_formal = {
 },
     ],
         timeline_variables:EW_words,
-        randomize_order:true,
+       // randomize_order:true,
+        sample:{
+          type:"custom",
+          fn:(x)=>{
+           return x.splice(0,SRET_sample)//88个词，4首+80+4尾
+        }},
         repetitions:1,
         on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
@@ -733,7 +753,7 @@ var instructions_math = {
   type: jsPsychHtmlButtonResponse,      
   stimulus: `<div style="width:700px;">
     <p style='color:white;font-size:45px; line-height:30px;'>计算任务</p>
-    <p style='color:white;font-size:25px; line-height:30px;'><b>接下来，您将看到一些四则运算题，请从键盘选择0-9进行反应。</b></p>
+    <p style='color:white;font-size:25px; line-height:30px;'><b>接下来，您将看到一些四则运算题，请从键盘选择 0-9进行反应。</b></p>
     <p class='footer' style='color:white;font-size:25px; line-height:30px;'>如果对本实验还有不清楚之处，请立即向实验员咨询。</p><p style='color:white;font-size:25px; line-height:30px;'>如果您明白了规则：</p><p style='color:white;font-size:22px; line-height:25px;'>请按 继续 进入练习</p>
     </div>
     `,
@@ -769,7 +789,7 @@ var math = {
       content: function(){return jsPsych.timelineVariable('math',true)}, 
       startX: "center", 
       startY: "center", 
-      font: `${60}px '微软雅黑'`, 
+      font: `${50}px '微软雅黑'`, 
       text_color: 'white',
       show_start_time: 1000, // ms after the start of the trial
       //show_end_time: 4000,//出现3000ms
@@ -790,7 +810,12 @@ var math = {
 },
     ],
         timeline_variables:Q_math_sample,//计算题材料
-        randomize_order:true,
+        //randomize_order:true,
+        sample:{
+          type:"custom",
+          fn:(x)=>{
+           return x.splice(0,math_sample)//
+        }},
         repetitions:1,
         on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
@@ -804,10 +829,10 @@ var Instruct_RJ = {
   return[
     `<p class='header' style = 'color:white;font-size: 45px; line-height:30px;'><b>回忆部分</b></p>`+
    `<p style='color:white;font-size:25px; line-height:30px;'><b>在本实验中，您将会看到一些形容词。<br>您的任务是判断这些形容词是否在前一个实验阶段中出现过。</b></p>`+
-   `<p style='color:red;font-size:25px; line-height:30px;'>如果未出现过则为“新词”，按“1”；</p>`+
-    `<p style='color:green;font-size:25px; line-height:30px;'>如果感觉该词先前出现过，但不能回忆起细节，对该词的印象模糊，则归为“熟悉”，按“2”；</p>
-    <p style='color:yellow;font-size:25px; line-height:30px;'>如果先前出现过且能回忆起该词伴随的条件细节，则归为“旧词”，按“3”。 </p>`,
-    `<p style='color:white;font-size:25px; line-height:30px;'>对于“熟悉”和“旧词”，您还需要进行二次判断：<br>判断该词是在 “朋友” 还是 “自己” 条件下出现过。</p><p style='color:red;font-size:25px; line-height:30px;'><b>如果是在 “自己” 条件下出现过，则按 “F” ；<b></p><p style='color:yellow;font-size:25px; line-height:30px;'><b>如果是在 “朋友” 条件下出现过，则按 “J”。</b></p>
+   `<p style='color:white;font-size:25px; line-height:30px;'><b>如果未出现过则为 “ 新词 ”，按 “ 1 ”；</b></p>`+
+    `<p style='color:lightgreen;font-size:25px; line-height:30px;'><b>如果感觉该词先前出现过，但不能回忆起细节，对该词的印象模糊，则归为 “ 熟悉 ”，按 “ 2 ”；</b></p>
+    <p style='color:yellow;font-size:25px; line-height:30px;'><b>如果先前出现过且能回忆起该词伴随的条件细节，则归为 “ 旧词 ”，按 “ 3 ”。 </b></p>`,
+    `<p style='color:white;font-size:25px; line-height:30px;'>对于 “ 熟悉 ”和 “ 旧词 ”，您还需要进行二次判断：<br>判断该词是在 “ 朋友 ” 还是 “ 自己 ” 条件下出现过。</p><p style='color:lightgreen;font-size:25px; line-height:30px;'><b>如果是在 “ 自己 ” 条件下出现过，则按 “ F ” ；<b></p><p style='color:yellow;font-size:25px; line-height:30px;'><b>如果是在 “ 朋友 ” 条件下出现过，则按 “ J ”。</b></p>
     <p class='footer' style='font-size:25px; line-height:30px;'>如果对本实验还有不清楚之处，请立即向实验员咨询。</p><p style='font-size:25px; line-height:30px;'>如果您明白了规则：</p><p style='font-size:22px; line-height:25px;'>请按 继续 进入练习</p>`
     ];},
     show_clickable_nav: true,
@@ -826,10 +851,10 @@ var Instruct_RJ2 = {
   return[
     `<p class='header' style = 'font-size: 45px; line-height:30px;'><b>回忆部分</b></p>`+
    `<p style='color:white;font-size:25px; line-height:30px;'><b>在本实验中，您将会看到一些形容词。您的任务是判断这些形容词是否在前一个实验阶段中出现过。</b></p>`+
-   `<p style='color:red;font-size:25px; line-height:30px;'>如果未出现过则为“新词”，按“1”；</p>`+
-    `<p style='color:white;font-size:25px; line-height:30px;'>如果感觉该词先前出现过，但不能回忆起细节，对该词的印象模糊，则归为“熟悉”，按“2”；</p>
-    <p style='color:yellow;font-size:25px; line-height:30px;'>如果先前出现过且能回忆起该词伴随的条件细节，则归为“旧词”，按“3”。 </p>`,
-    `<p>对于“熟悉”和“旧词”，您还需要进行二次判断：判断该词是在“朋友”还是“自己”条件下出现过。</p><br><p style='color:red;font-size:25px; line-height:30px;'><b>如果是在“自己”条件下出现过，则按 “F” ；如果是在“朋友”条件下出现过，则按 “J”。</b></p>
+   `<p style='color:white;font-size:25px; line-height:30px;'><b>如果未出现过则为 “ 新词 ”，按 “ 1 ”；</b></p>`+
+    `<p style='color:lightgreen;font-size:25px; line-height:30px;'><b>如果感觉该词先前出现过，但不能回忆起细节，对该词的印象模糊，则归为 “ 熟悉 ”，按 “ 2 ”；</b></p>
+    <p style='color:yellow;font-size:25px; line-height:30px;'><b>如果先前出现过且能回忆起该词伴随的条件细节，则归为 “ 旧词 ”，按 “ 3 ”。 </b></p>`,
+    `<p>对于“熟悉”和“旧词”，您还需要进行二次判断：判断该词是在 “ 朋友 ”还是 “ 自己 ”条件下出现过。</p><br><p style='color:lightred;font-size:25px; line-height:30px;'><b>如果是在 “ 自己 ” 条件下出现过，则按 “ F ” ；如果是在 “ 朋友 ” 条件下出现过，则按 “ J ”。</b></p>
     <p class='footer' style='font-size:25px; line-height:30px;'>如果对本实验还有不清楚之处，请立即向实验员咨询。</p><p style='font-size:25px; line-height:30px;'>如果您明白了规则：</p><p style='font-size:22px; line-height:25px;'>请按 继续 进入正式实验</p>`
     ];},
     show_clickable_nav: true,
@@ -844,7 +869,7 @@ var Instruct_RJ2 = {
 
 var fixation = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: `<div style="color:white;font-size:40px;font-weight:bold; line-height:5px;">+</div>`,
+  stimulus: `<div style="color:white;font-size:40px;line-height:5px;position:absolute; transform: translate(-50%, -50%)">+</div>`,
   choices: "NO_KEYS",
   trial_duration: 500,
   
@@ -852,7 +877,11 @@ var fixation = {
 var RJ_formal1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function() {
-      var stim = '<p style="color:white;font-size:40px;">' + jsPsych.timelineVariable('Words', true) + '</p><br><p style="color:white;font-size:40px">新词按 “1” ，熟悉按 “2” ，旧词按 “3” </p>';
+    var stim = '<div><p style="position: absolute; top:calc(50%);transform: translate(-50%, -50%);text-align: center; color: white; font-size: 40px;">'  + jsPsych.timelineVariable('Words', true) + '</p>' +
+    '<p style="position:absolute; text-align: center;font-size: 25px;top:calc(50% + 250px);transform: translate(-50%)">新词按 “1” ，熟悉按 “2” ，旧词按 “3”</p>' +
+    '</div>';
+
+
       return stim;
   },
   choices: ['1','2','3'],
@@ -884,7 +913,9 @@ var RJ_formal1 = {
 var RJ_formal2 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function() {
-      var stim = '<p style="color:white;font-size:40px">'+jsPsych.timelineVariable('Words')+'</p><br><p style="color:white;font-size:40px">自己按 “F” ，朋友按 “J” </p>';
+    var stim = '<div><p style="position: absolute; top:calc(50%);transform: translate(-50%, -50%);text-align: center; color: white; font-size: 40px;">'  + jsPsych.timelineVariable('Words', true) + '</p>' +
+    '<p style="position:absolute; text-align: center;font-size: 25px;top:calc(50% + 250px);transform: translate(-50%)">自己按 “ F ” ，朋友按 “ J ”</p>' +
+    '</div>';
       return stim;
   },
   choices: ['f','j'],
@@ -921,7 +952,12 @@ var RJ_excercise={ timeline: [fixation,RJ_formal1,if_RJ],
 
 var RJ={ timeline: [fixation,RJ_formal1,if_RJ],
   timeline_variables:RJ_formal_words,
-  randomize_order:true,
+  //randomize_order:true,
+  sample:{
+    type:"custom",
+    fn:(x)=>{
+     return x.splice(0,RJ_sample)//160个词
+  }},
   repetitions:1,};
 
   /*

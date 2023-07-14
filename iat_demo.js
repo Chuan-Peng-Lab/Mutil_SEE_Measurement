@@ -459,10 +459,10 @@ function zip(arrays) {
 // ITI设置trial间间隔，刺激自动呈现，'categorize-html'plugin设置按键后的反馈
 
 
-function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func, iat_sample,iti = 250) {
-    var stimuli = iat_sample > 0 ? stimuli.slice(0, iat_sample) : stimuli;
+function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func,iat_sample,iti = 250) {
+    var stimuliSubset = iat_sample > 0 ? stimuli.slice(0, iat_sample) : stimuli;
     var IAT = {
-        timeline_variables: toStimuli(stimuli),
+        timeline_variables: toStimuli(stimuliSubset),
         timeline: [{
             type: jsPsychHtmlKeyboardResponse,
             stimulus: '',
@@ -509,7 +509,7 @@ function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func, ia
 var IAT1 = blockTemplateIAT(
     block_id = 1,
     tag = tag_IAT_prac_target_1,
-    iat_sample = 12,
+    iat_sample= 12,
     stimuli = generateRandomTrials(12, [].concat(iat.targetA.items, iat.targetB.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -526,7 +526,7 @@ var IAT1 = blockTemplateIAT(
 var IAT2 = blockTemplateIAT(
     block_id = 2,
     tag = tag_IAT_prac_attrib,
-    iat_sample = 12,
+    iat_sample= 12,
     stimuli = generateRandomTrials(12, [].concat(iat.attribA.items, iat.attribB.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -543,7 +543,7 @@ var IAT2 = blockTemplateIAT(
 var IAT3 = blockTemplateIAT(
     block_id = 3,
     tag = tag_IAT_test_1,
-    iat_sample = 24,
+    iat_sample= 24,
     stimuli = zip([iat.targetA.items, iat.attribA.items, iat.targetB.items, iat.attribB.items]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -565,7 +565,7 @@ var IAT3 = blockTemplateIAT(
 var IAT4 = blockTemplateIAT(
     block_id = 4,
     tag = tag_IAT_test_1,
-    iat_sample = 48,
+    iat_sample= 48,
     stimuli = zip([generateRandomTrials(12,iat.targetA.items), generateRandomTrials(12,iat.attribA.items), generateRandomTrials(12,iat.targetB.items), generateRandomTrials(12,iat.attribB.items)]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -604,7 +604,7 @@ var IAT5 = blockTemplateIAT(
 var IAT6 = blockTemplateIAT(
     block_id = 6,
     tag = tag_IAT_test_2,
-    iat_sample = 24,
+    iat_sample= 24,
    /*stimuli = crossArrays(
         generateRandomTrials(12, [].concat(iat.attribA.items, iat.attribB.items)),
         generateRandomTrials(12, [].concat(iat.targetB.items, iat.targetA.items)),
@@ -953,7 +953,7 @@ var IAT_instr07 = {
 var IAT11 = blockTemplateIAT(
     block_id = 11,
     tag = tag_IAT_prac_target_01,
-    iat_sample=12,
+    iat_sample= 12,
     stimuli = generateRandomTrials(12, [].concat(iat2.targetA.items, iat2.targetB.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -969,7 +969,7 @@ var IAT11 = blockTemplateIAT(
 var IAT12 = blockTemplateIAT(
     block_id = 12,
     tag = tag_IAT_prac_attrib2,
-    iat_sample=12,
+    iat_sample= 12,
     stimuli = generateRandomTrials(12, [].concat(iat2.attribC.items, iat2.attribD.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -985,11 +985,11 @@ var IAT12 = blockTemplateIAT(
 var IAT13 = blockTemplateIAT(
     block_id = 13,
     tag = tag_IAT_test_01,
-    iat_sample=24,
     /*stimuli = crossArrays(
         generateRandomTrials(12, [].concat(iat2.targetA.items, iat2.targetB.items)),
         generateRandomTrials(12, [].concat(iat2.attribC.items, iat2.attribD.items)),
     ),*/
+    iat_sample= 24,
     stimuli = zip([iat2.targetA.items, iat2.attribC.items, iat2.targetB.items, iat2.attribD.items]),
 
     stim_func = function() {
@@ -1011,11 +1011,11 @@ var IAT13 = blockTemplateIAT(
 var IAT14 = blockTemplateIAT(
     block_id = 14,
     tag = tag_IAT_test_01,
-    iat_sample=48,
     /*stimuli = crossArrays(
         generateRandomTrials(24, [].concat(iat2.targetA.items, iat2.targetB.items)),
         generateRandomTrials(24, [].concat(iat2.attribC.items, iat2.attribD.items)),
     ),*/
+    iat_sample= 48,
     stimuli = zip([generateRandomTrials(12,iat2.targetA.items), generateRandomTrials(12,iat2.attribC.items), generateRandomTrials(12,iat2.targetB.items), generateRandomTrials(12, iat2.attribD.items)]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -1036,7 +1036,7 @@ var IAT14 = blockTemplateIAT(
 var IAT15 = blockTemplateIAT(
     block_id = 15,
     tag = tag_IAT_prac_target_02,
-    iat_sample=24,
+    iat_sample= 24,
     stimuli = generateRandomTrials(24, [].concat(iat2.targetB.items, iat2.targetA.items)),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -1052,11 +1052,11 @@ var IAT15 = blockTemplateIAT(
 var IAT16 = blockTemplateIAT(
     block_id = 16,
     tag = tag_IAT_test_02,
-    iat_sample=24,
     /*stimuli = crossArrays(
         generateRandomTrials(12, [].concat(iat2.attribC.items, iat2.attribD.items)),
         generateRandomTrials(12, [].concat(iat2.targetB.items, iat2.targetA.items)),
     ),*/
+    iat_sample= 24,
     stimuli = zip([iat2.attribC.items, iat2.targetB.items, iat2.attribD.items, iat2.targetA.items]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)
@@ -1077,11 +1077,11 @@ var IAT16 = blockTemplateIAT(
 var IAT17 = blockTemplateIAT(
     block_id = 17,
     tag = tag_IAT_test_02,
-    iat_sample=48,
     /*stimuli = crossArrays(
         generateRandomTrials(24, [].concat(iat2.attribC.items, iat2.attribD.items)),
         generateRandomTrials(24, [].concat(iat2.targetB.items, iat2.targetA.items)),
     ),*/
+    iat_sample= 48,
     stimuli = zip([generateRandomTrials(12,iat2.attribC.items), generateRandomTrials(12,iat2.targetB.items), generateRandomTrials(12,iat2.attribD.items), generateRandomTrials(12, iat2.targetA.items)]),
     stim_func = function() {
         var stim = jsPsych.timelineVariable('s', true)

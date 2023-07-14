@@ -413,8 +413,13 @@ var ALT2_Instructions0 = {
           {Image:images1[2], word:function(){return texts[2]}, identify:function(){return key[0]}},
           {Image:images1[3], word:function(){return texts[3]}, identify:function(){return key[0]}},
     ],
-    randomize_order:true,
-    repetitions:2,
+    //randomize_order:true,
+    sample:{
+      type:"custom",
+      fn:(x)=>{
+       return x.splice(0,alt2_sample)
+    }},
+    repetitions:alt2_n,
     on_finish:function(){
         // $("body").css("cursor", "default"); //鼠标出现
     }
@@ -426,8 +431,8 @@ var ALT2_Instructions0 = {
     stimulus: function () {
       let trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算
-      //这里填入timeline_variables里面的trial数量
+      ).last(alt2_sample*alt2_n); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算
+      //这里填入timeline_variables里面的trial数量，48
       let correct_trials = trials.filter({
         correct: true
       });
@@ -474,7 +479,7 @@ var feedback_continue_practice3 = { //在这里呈现文字recap，让被试再�
     conditional_function: function (data) {
       var trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）
+      ).last(alt2_sample*alt2_n);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）,48
       var correct_trials = trials.filter({
         correct: true
       });
@@ -493,7 +498,7 @@ var feedback_continue_practice3 = { //在这里呈现文字recap，让被试再�
     loop_function: function () {
       var trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);//记得改，取数据
+      ).last(alt2_sample*alt2_n);//记得改，取数据,48
       var correct_trials = trials.filter({
         correct: true
       });
@@ -513,7 +518,7 @@ var feedback_goformal = {
     stimulus: function () {
       let trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);
+      ).last(alt2_sample*alt2_n);//48
       let correct_trials = trials.filter({
         correct: true
       });
@@ -653,8 +658,13 @@ var feedback_goformal = {
     {Image:images1[2], word:function(){return texts[2]}, identify:function(){return key[0]}},
     {Image:images1[3], word:function(){return texts[3]}, identify:function(){return key[0]}},
 ],
-    randomize_order:true,
-    repetitions:2,//正是实验时改为6
+    //randomize_order:true,
+    sample:{
+      type:"custom",
+      fn:(x)=>{
+       return x.splice(0,alt2_sample)
+    }},
+    repetitions:alt2_n,//正是实验时改为6
     on_finish:function(){
         // $("body").css("cursor", "default"); //鼠标出现
     }
@@ -666,7 +676,7 @@ var feedback_goformal = {
       // aaaaa = 1;  筛选，必须要！！！！！！！！！！！
       let trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);// last()填入一个block里的trial总数
+      ).last(alt2_sample*alt2_n);// last()填入一个block里的trial总数,48
       let correct_trials = trials.filter({
         correct: true
       });
@@ -683,7 +693,7 @@ var feedback_goformal = {
   };
 
 
-  let blockTotalNum_same = 7;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2，此处为7
+  let blockTotalNum = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2，此处为7
 let rest_same = {
   type:jsPsychHtmlButtonResponse,
   stimulus: function () {
@@ -691,7 +701,7 @@ let rest_same = {
         [{ correct: true }, { correct: false }]
       );
       return `
-                    <p>您当前还剩余${blockTotalNum_same}组实验</p>
+                    <p>您当前还剩余${blockTotalNum}组实验</p>
                     <p>现在是休息时间，当您结束休息后，您可以点击 结束休息 按钮 继续。</p>
                     <p>建议休息时间还剩余<span id="iii">60</span>秒</p>`
     },
@@ -709,7 +719,7 @@ let rest_same = {
     },
     on_finish: function () {
       $("body").css("cursor", "none"); //鼠标消失
-      blockTotalNum_same -= 1;
+      blockTotalNum -= 1;
       $(document.body).unbind();
       clearInterval(parseInt(sessionStorage.getItem("tmpInter")));
     }
@@ -739,7 +749,7 @@ let rest_same = {
     p_gotosame,//进入正式实验的指导语
     {
         timeline: [same, feedback_block, rest_same],//48 trials的，先十字，刺激，反馈，数据；休息的反馈；结束休息的信号（休息1分钟）
-        repetitions: 8
+        repetitions: blockTotalNum_same+1,//8个
     },//
     cong_same//完成一个的结束语
 ];
@@ -903,8 +913,13 @@ var prac_s2 = {
     {Image:images2[2], word:function(){return texts2[2]}, identify:function(){return key[0]}},
     {Image:images2[3], word:function(){return texts2[3]}, identify:function(){return key[0]}},
   ],
-  randomize_order:true,
-  repetitions:2,
+  //randomize_order:true,
+  sample:{
+    type:"custom",
+    fn:(x)=>{
+     return x.splice(0,alt2_sample)
+  }},
+  repetitions:alt2_n,
   on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
   }
@@ -916,7 +931,7 @@ var feedback_p2 = {
   stimulus: function () {
     let trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算
+    ).last(alt2_sample*alt2_n); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算,48
     //这里填入timeline_variables里面的trial数量
     let correct_trials = trials.filter({
       correct: true
@@ -982,7 +997,7 @@ var loop_node2 = {
   loop_function: function () {
     var trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);//记得改，取数据
+    ).last(alt2_sample*alt2_n);//记得改，取数据,48
     var correct_trials = trials.filter({
       correct: true
     });
@@ -1002,7 +1017,7 @@ var feedback_goformal2 = {
   stimulus: function () {
     let trials2 = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);
+    ).last(alt2_sample*alt2_n);//48
     let correct_trials2 = trials2.filter({
       correct: true
     });
@@ -1141,8 +1156,13 @@ let same2 = {
     {Image:images2[2], word:function(){return texts2[2]}, identify:function(){return key[0]}},
     {Image:images2[3], word:function(){return texts2[3]}, identify:function(){return key[0]}},
 ],
-  randomize_order:true,
-  repetitions:2,//正是实验时改为6
+  //randomize_order:true,
+  sample:{
+    type:"custom",
+    fn:(x)=>{
+     return x.splice(0,alt2_sample)
+  }},
+  repetitions:alt2_n,//正是实验时改为6
   on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
   }
@@ -1154,7 +1174,7 @@ let feedback_block2 = {
     // aaaaa = 1;  筛选，必须要！！！！！！！！！！！
     let trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);// last()填入一个block里的trial总数
+    ).last(alt2_sample*alt2_n);// last()填入一个block里的trial总数,48
     let correct_trials = trials.filter({
       correct: true
     });
@@ -1171,7 +1191,7 @@ let feedback_block2 = {
 };
 
 
-let blockTotalNum_same2 = 7;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2
+let blockTotalNum_2 = blockTotalNum_same;// 此处填入总block数量-1，比如总数量是3，那么值就需要是2
 let rest_same2 = {
 type:jsPsychHtmlButtonResponse,
 stimulus: function () {
@@ -1179,7 +1199,7 @@ stimulus: function () {
       [{ correct: true }, { correct: false }]
     );
     return `
-                  <p style='color:white;'>您当前还剩余${blockTotalNum_same2}组实验</p>
+                  <p style='color:white;'>您当前还剩余${blockTotalNum_2}组实验</p>
                   <p style='color:white;'>现在是休息时间，当您结束休息后，您可以点击 结束休息 按钮 继续。</p>
                   <p style='color:white;'>建议休息时间还剩余<span id="iii">60</span>秒</p>`
   },
@@ -1197,7 +1217,7 @@ stimulus: function () {
   },
   on_finish: function () {
     $("body").css("cursor", "none"); //鼠标消失
-    blockTotalNum_same2 -= 1;
+    blockTotalNum_2 -= 1;
     $(document.body).unbind();
     clearInterval(parseInt(sessionStorage.getItem("tmpInter")));
   }
@@ -1230,7 +1250,7 @@ var repeatblock2 = [
   p_gotosame2,
   {
       timeline: [same2, feedback_block2, rest_same2],
-      repetitions: 8
+      repetitions: blockTotalNum_same,
   },
   cong_same2
 ];
@@ -1245,7 +1265,7 @@ var repeatblock2 = [
 //timeline.push(
   var ALT_2 = {
   timeline: [
-    ALT2_Instructions0,
+    //ALT2_Instructions0,
       {
       timeline: repeatblock3,
       conditional_function: () => {

@@ -376,7 +376,7 @@ var Instructions0 = {
     stimulus: function () {
       let trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算
+      ).last(alt1_sample*alt1_n); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算,48
       //这里填入timeline_variables里面的trial数量
       let correct_trials = trials.filter({
         correct: true
@@ -424,7 +424,7 @@ var feedback_continue_practice3 = { //在这里呈现文字recap，让被试再�
     conditional_function: function (data) {
       var trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）
+      ).last(alt1_sample*alt1_n);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）,48
       var correct_trials = trials.filter({
         correct: true
       });
@@ -443,7 +443,7 @@ var feedback_continue_practice3 = { //在这里呈现文字recap，让被试再�
     loop_function: function () {
       var trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);//记得改，取数据
+      ).last(alt1_sample*alt1_n);//记得改，取数据,48
       var correct_trials = trials.filter({
         correct: true
       });
@@ -463,7 +463,7 @@ var feedback_goformal = {
     stimulus: function () {
       let trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);
+      ).last(alt1_sample*alt1_n);//48
       let correct_trials = trials.filter({
         correct: true
       });
@@ -621,7 +621,7 @@ sample:{
       // aaaaa = 1;  筛选，必须要！！！！！！！！！！！
       let trials = jsPsych.data.get().filter(
         [{ correct: true }, { correct: false }]
-      ).last(48);// last()填入一个block里的trial总数
+      ).last(alt1_sample*alt1_n);// last()填入一个block里的trial总数,48
       let correct_trials = trials.filter({
         correct: true
       });
@@ -872,7 +872,7 @@ var feedback_p2 = {
   stimulus: function () {
     let trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算
+    ).last(alt1_sample*alt1_n); // 运行逻辑：先挑出data里的所有的correct：true/false的数据行，成为新的数组，然后对倒数的某几组进行计算,48
     //这里填入timeline_variables里面的trial数量
     let correct_trials = trials.filter({
       correct: true
@@ -918,7 +918,7 @@ var if_node2 = { //if_node 用于判断是否呈现feedback，feedback_continue_
   conditional_function: function (data) {
     var trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）
+    ).last(alt1_sample*alt1_n);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）,48
     var correct_trials = trials.filter({
       correct: true
     });
@@ -937,7 +937,7 @@ var loop_node2 = {
   loop_function: function () {
     var trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);//记得改，取数据
+    ).last(alt1_sample*alt1_n);//记得改，取数据,48
     var correct_trials = trials.filter({
       correct: true
     });
@@ -957,7 +957,7 @@ var feedback_goformal2 = {
   stimulus: function () {
     let trials2 = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);
+    ).last(alt1_sample*alt1_n);//48
     let correct_trials2 = trials2.filter({
       correct: true
     });
@@ -1115,7 +1115,7 @@ let feedback_block2 = {
     // aaaaa = 1;  筛选，必须要！！！！！！！！！！！
     let trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);// last()填入一个block里的trial总数
+    ).last(alt1_sample*alt1_n);// last()填入一个block里的trial总数,48
     let correct_trials = trials.filter({
       correct: true
     });

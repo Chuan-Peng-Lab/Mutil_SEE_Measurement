@@ -124,7 +124,7 @@ var jsPsychSurveyTemplate = (function (jspsych) {
         display: contents;
       }
       .survey-template-row:hover div {
-        background-color: #dee8eb;
+        background-color: ＃C0C0C0;
       }
       .survey-template-header {
         padding: 18px 0 0px 0;

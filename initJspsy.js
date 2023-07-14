@@ -21,7 +21,12 @@ const jsPsych = initJsPsych({
               jsPsych.data.get().addToAll(info).localSave("csv", `rawdata_${info["subj_idx"]}_day1.csv`); //原始数据读取和保存
               let DOM = document.getElementById("jspsych-content");
               DOM.innerHTML = "<p>正在保存数据中，请稍后</p>";
-        
+              jsPsych.github.config({
+                owner: "Chenghao-Zhou", // the repo owner
+                repo: "Measuring_Pos_Self", // the repo to save the data
+                path: "/data/origin_day1", // the file path of the repo，每个实验都有一个
+                token:"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",
+              })
               if (jsPsych.github.upload(
                 `rawdata_${info["subj_idx"]}_day1.csv`, //基于实验修改文件名
                 `new data: rawdata_${info["subj_idx"]}_day1.csv is compeleted`, //基于实验修改文件名
@@ -33,12 +38,7 @@ const jsPsych = initJsPsych({
               }
             },
      });
-     jsPsych.github.config({
-      owner: "Chenghao-Zhou", // the repo owner
-      repo: "Measuring_Pos_Self", // the repo to save the data
-      path: "/data/origin_day1", // the file path of the repo，每个实验都有一个
-      token:"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",
-    })
+
 
     let debug = false;
     let alt1_sample =24;//ALT1中12match+12mismatch

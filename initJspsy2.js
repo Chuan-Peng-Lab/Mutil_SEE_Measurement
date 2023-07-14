@@ -1,9 +1,3 @@
-jsPsych.github.config({
-  owner: "Chenghao-Zhou", // the repo owner
-  repo: "Measuring_Pos_Self", // the repo to save the data
-  path: "/data/origin_day2", // the file path of the repo，每个实验都有一个
-  token:"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",
-})
 const jsPsych = initJsPsych({
     /* auto_update_progress_bar: true,
      extensions: {
@@ -27,7 +21,12 @@ const jsPsych = initJsPsych({
               jsPsych.data.get().addToAll(info).localSave("csv", `rawdata_${info["subj_idx"]}_day2.csv`); //原始数据读取和保存
               let DOM = document.getElementById("jspsych-content");
               DOM.innerHTML = "<p>正在保存数据中，请稍后</p>";
-        
+              jsPsych.github.config({
+                owner: "Chenghao-Zhou", // the repo owner
+                repo: "Measuring_Pos_Self", // the repo to save the data
+                path: "/data/origin_day2", // the file path of the repo，每个实验都有一个
+                token:"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",
+              });
               if (jsPsych.github.upload(
                 `rawdata_${info["subj_idx"]}_day2.csv`, //基于实验修改文件名
                 `new data: rawdata_${info["subj_idx"]}_day2.csv is compeleted`, //基于实验修改文件名
@@ -39,4 +38,27 @@ const jsPsych = initJsPsych({
               }
             },
      });
+    
+     let debug = false;
+     let SRET_sample =88;
+     let math_sample =24;//待改
+     let  RJ_sample =160;
+     let alt2_sample =24;//ALT2中12match+12mismatch
+     let  blockTotalNum_same=7;//ALT2正式实验重复组次数-1
+     let  alt2_n=2;//ALT2的24trials重复次数
+     if (jsPsych.data.getURLVariable("debug")) {
+      version = "t3"
+      debug = true;
+      // 调试参数
+       SRET_sample =5;
+       math_sample =5;//待改
+      RJ_sample =5;
+      alt2_sample =6;//ALT1中12match+12mismatch
+      blockTotalNum_same=1;//ALT1正式实验重复组次数-1
+      alt2_n=1;//ALT1的24trials重复次数
+      if (jsPsych.data.getURLVariable("auto")) {
+          auto(); // 自动运行，方便调试
+      }
+  } // 这玩意，只是为了方便调
+
     
