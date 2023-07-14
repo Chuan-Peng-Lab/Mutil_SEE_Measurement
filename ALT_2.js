@@ -978,7 +978,7 @@ var if_node2 = { //if_node 用于判断是否呈现feedback，feedback_continue_
   conditional_function: function (data) {
     var trials = jsPsych.data.get().filter(
       [{ correct: true }, { correct: false }]
-    ).last(48);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）
+    ).last(alt2_sample*alt2_n);//这里注意：只需要上一组的练习数据，而不是所有的数据！！ 如何实现：.last() 取data最后的几组数据（上一组练习数据）
     var correct_trials = trials.filter({
       correct: true
     });
@@ -1250,7 +1250,7 @@ var repeatblock2 = [
   p_gotosame2,
   {
       timeline: [same2, feedback_block2, rest_same2],
-      repetitions: blockTotalNum_same,
+      repetitions: blockTotalNum_same+1,
   },
   cong_same2
 ];

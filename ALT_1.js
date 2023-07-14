@@ -272,7 +272,7 @@ var Instructions0 = {
             content: function () {
               return jsPsych.timelineVariable("word", true);
             },
-            font: `${80}px 'Arial'`, //字体和颜色设置 文字视角：3.6° x 1.6°
+            font: `${80}px '微软雅黑'`, //字体和颜色设置 文字视角：3.6° x 1.6°
             text_color: 'white',
             show_start_time: 1000, // ms after the start of the trial
             show_end_time: 1100,//出现100ms
@@ -517,7 +517,7 @@ var feedback_goformal = {
         content: function () {
           return jsPsych.timelineVariable("word", true);
         },
-        font: `${80}px 'Arial'`, //字体和颜色设置 文字视角：3.6° x 1.6°
+        font: `${80}px '微软雅黑'`, //字体和颜色设置 文字视角：3.6° x 1.6°
         text_color: 'white',
         show_start_time: 1000, // ms after the start of the trial
         show_end_time: 1100,//出现100ms
@@ -694,7 +694,7 @@ let rest_same = {
     p_gotosame,//进入正式实验的指导语
     {
         timeline: [same, feedback_block, rest_same],//48 trials的，先十字，刺激，反馈，数据；休息的反馈；结束休息的信号（休息1分钟）
-        repetitions: blockTotalNum_same+1
+        repetitions: blockTotalNum_same+1,
     },//
     cong_same//完成一个的结束语
 ];
@@ -768,7 +768,7 @@ var prac_s2 = {
           content: function () {
             return jsPsych.timelineVariable("word", true);
           },
-          font: `${80}px 'Arial'`, //字体和颜色设置 文字视角：3.6° x 1.6°
+          font: `${80}px '微软雅黑'`, //字体和颜色设置 文字视角：3.6° x 1.6°
           text_color: 'white',
           show_start_time: 1000, // ms after the start of the trial
           show_end_time: 1100,//出现100ms
@@ -1205,7 +1205,7 @@ var repeatblock2 = [
 //timeline.push({timeline:[Instructions0,{timeline:repeatblock3}]})
 //timeline.push({
  var ALT_1 ={timeline: [
-      Instructions0,
+     // Instructions0,
       {
       timeline: repeatblock3,
       conditional_function: () => {

@@ -134,7 +134,7 @@
     return array;
   }
   
-  var Q_math_sample = shuffle(Q_math).slice(0, 40);//随机抽取40个
+  var Q_math_sample = shuffle(Q_math).slice(0, 60);//随机抽取40个
   
 
 
@@ -765,7 +765,10 @@ var instructions_math = {
     }
 };
 //timeline.push(instructions_math);
-
+var start_time;
+var end_test_timer;
+var trial_count = 0;
+var n_trials = Q_math_sample.length;
 var math = {
   timeline:[
 {
@@ -795,27 +798,40 @@ var math = {
       //show_end_time: 4000,//出现3000ms
       response_ends_trial:true,
       origin_center: true
-  },   
-     
+  },       
       ],
 
           choices: ['0','1', '2',"3", "4", "5",'6','7','8','9'],
-          response_start_time:1000,//开始作答时间，第二个刺激开始计算
-          trial_duration:5000,//结束时间
-  
+          //response_start_time:1000,//开始作答时间，第二个刺激开始计算
+         // trial_duration:5000,//结束时间
+         on_load: function() {
+          trial_count++;
+          // we need to set up the timer to end the current timeline after a certain duration, but only on the first trial
+          if (trial_count == 1) {
+              start_time = performance.now();
+              var end_test_timer = setTimeout(function() {
+                  // this stuff is just for testing
+                  var end_time = performance.now();
+                  var elapsed_time = end_time - start_time;
+                  console.log("elapsed time: ", elapsed_time);
+                  // this function is all you need to end the current timeline
+                  jsPsych.endCurrentTimeline();
+                  // this function ends the current trial 
+                  jsPsych.finishTrial({status: "ended early"});
+              }, math_time_limit);
+          }
+      }, 
            on_finish: function(data){   
+            if (trial_count == n_trials) {
+              clearTimeout(end_test_timer);
+          }
            data.math = jsPsych.timelineVariable("math", true);
-           
+           data. correct_response=jsPsych.timelineVariable('correct_answer',true);
       }
 },
     ],
         timeline_variables:Q_math_sample,//计算题材料
-        //randomize_order:true,
-        sample:{
-          type:"custom",
-          fn:(x)=>{
-           return x.splice(0,math_sample)//
-        }},
+        randomize_order:true,
         repetitions:1,
         on_finish:function(){
       // $("body").css("cursor", "default"); //鼠标出现
