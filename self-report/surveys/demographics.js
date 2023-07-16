@@ -1,7 +1,7 @@
 /*人口统计学变量*/
 //  day1_Q1
 var gender_scale = ["A.男", "B.女"];
-var age_scale = ["<20", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+"];
+var month_scale = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12"];
 var ethnicity_scale = ["汉族","蒙古族","回族","藏族","维吾尔族","苗族","彝族","壮族","布依族","朝鲜族","满族","侗族",
 "瑶族","白族","土家族","哈尼族","哈萨克族","傣族","黎族","僳僳族","佤族","畲族","高山族","拉祜族","水族","东乡族","纳西族","景颇族","柯尔克孜族",
 "土族","达斡尔族","仫佬族","羌族","布朗族","撒拉族","毛南族","仡佬族","锡伯族","阿昌族","普米族","塔吉克族","怒族","乌孜别克族","俄罗斯族","鄂温克族","德昂族","保安族",
@@ -25,14 +25,15 @@ var demographics_1 = {
      [
         { type:"drop-down",prompt: "1.民族", options: ethnicity_scale, name: 'ethnicity', required: true },
         { type:"drop-down",prompt: "2.性别", options: gender_scale,  name: 'gender', required: true },
-        { type:"text", prompt: "3.您的出生年月",placeholder: '例如: 1999-01', name: 'age', required: true },],
+        { type:"text",prompt: "3.您的出生年", placeholder: '例如: 1999',  name: 'birthyear', required: true },
+        { type:"drop-down",prompt: "4.您的出生月", options: month_scale,  name: 'birthmonth', required: true },],
         [
-        { type:"drop-down", prompt: "4.您的最高受教育程度", options: edu_scale,  name: 'selfEdu', required: true },
-        { type:"drop-down",prompt: "5.父亲受教育程度", options: edu2_scale,  name: 'fatherEdu', required: true },
-        { type:"drop-down",prompt: "6.母亲受教育程度", options: edu2_scale,  name: 'motherEdu', required: true },],
-        [{ type:"multi-choice",prompt: "7.父亲职业", options: occupation_scale, horizontal: true,  name: 'FatherOccupation', required: true },
-        { type:"multi-choice",prompt: "8.母亲职业", options: occupation_scale,  horizontal: true, name: 'MotherOccupation', required: true },],
-        [{ type:"text",prompt: "9.家庭月收入（人民币/元）", placeholder: '例如: 3000',  name: 'income', required: true }
+        { type:"drop-down", prompt: "5.您的最高受教育程度", options: edu_scale,  name: 'selfEdu', required: true },
+        { type:"drop-down",prompt: "6.父亲受教育程度", options: edu2_scale,  name: 'fatherEdu', required: true },
+        { type:"drop-down",prompt: "7.母亲受教育程度", options: edu2_scale,  name: 'motherEdu', required: true },],
+        [{ type:"multi-choice",prompt: "8.父亲职业", options: occupation_scale,   name: 'FatherOccupation', required: true },
+        { type:"multi-choice",prompt: "9.母亲职业", options: occupation_scale,  name: 'MotherOccupation', required: true },],
+        [{ type:"text",prompt: "10.家庭月收入（人民币/元）", placeholder: '例如: 3000',  name: 'income', required: true }
     
     ],
            
@@ -51,17 +52,19 @@ var demographics_1 = {
         d1 = ethnicity_scale.indexOf(responses.ethnicity);
         d2 = gender_scale.indexOf(responses.gender);
         //d3 = age_scale.indexOf(responses.age);
-        d3=responses.age;
-        d4 = edu_scale.indexOf(responses.selfEdu);d5 = edu2_scale.indexOf(responses.fatherEdu);
-        d6 = edu2_scale.indexOf(responses.motherEdu);
-        d7 = occupation_scale.indexOf(responses.FatherOccupation);
-        d8 = occupation_scale.indexOf(responses.MotherOccupation);
+        d3=responses.birthyear;
+        d4 = month_scale.indexOf(responses.birthmonth);
+        d5 = edu_scale.indexOf(responses.selfEdu);d5 = edu2_scale.indexOf(responses.fatherEdu);
+        d6 = edu_scale.indexOf(responses.selfEdu);d5 = edu2_scale.indexOf(responses.fatherEdu);
+        d7 = edu2_scale.indexOf(responses.motherEdu);
+        d8 = occupation_scale.indexOf(responses.FatherOccupation);
+        d9 = occupation_scale.indexOf(responses.MotherOccupation);
         //d9 = income_scale.indexOf(responses.income);
-        d9=responses.income;
+        d10=responses.income;
         jsPsych.data.addProperties({
-            民族: d1, 性别: d2, 年龄: d3, 本人受教育程度: d4, 父亲受教育程度: d5, 母亲受教育程度: d6,
-            父亲职业: d7, 母亲职业: d8,
-            家庭年收入: d9
+            民族: d1, 性别: d2, 出生年: d3, 出生月:d4,本人受教育程度: d5, 父亲受教育程度: d6, 母亲受教育程度: d7,
+            父亲职业: d8, 母亲职业: d9,
+            家庭年收入: d10
         })
     }
 }

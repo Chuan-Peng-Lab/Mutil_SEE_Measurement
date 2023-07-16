@@ -9,6 +9,7 @@
 
      <!-- Initialize jsPsych -->
      <script src="./self-report/init-jspsych.js"></script>
+     <script src="./github.js"></script>
    
      <!-- Load jsPsych plug-ins -->
 
@@ -51,19 +52,35 @@ var welcome = {
 };
 timeline.push(welcome);//设置欢迎语
 var info = [];
+
 var information = {
   timeline: [{
   type: jsPsychSurveyHtmlForm,
-  preamble: "<p style =' color : black'>您的姓名是</p>",
-  html: function () {
-    let data = localStorage.getItem(info["subj_idx"]) ? JSON.parse(localStorage.getItem(info["subj_idx"]))["Name"] : "";
-    return "<p><input name='Q0' type='text' value='" + data + "' required/></p>";
-  },
+  preamble: " ",
+  html: `
+  <p>您的实验编号是</p> 
+      <input type="text" name="subj_idx" required/><br>
+      <p>您的姓名是</p> 
+      <input type="text" name="subj_name" required/><br>
+  `,
 
   button_label: "继续",
   on_finish: function (data) {
-    info["ID"] = data.response.Q0;}
-  }],}
+    var response = data.response;
+    var subj_idx='';
+    var subj_name='';
+    Object.entries(response).forEach(function ([name, value]) {
+        if (name === "subj_idx") {
+          subj_idx = value;
+        } else if (name === "subj_name") {
+          subj_name = value;
+        }
+      });
+      info["subj_idx"] = subj_idx;
+      info["subj_name"] = subj_name;
+    }
+  }]
+};
   
   timeline.push(information);
   

@@ -497,15 +497,15 @@ function blockTemplateIAT(block_id, tag, stimuli, stim_func, key_answer_func,iti
 /**
  * Standard IAT procedure (adapted from Greenwald et.al, 2022, Behavior Research Methods):
 
- * | block | category            | trials | practice/test | “E”      | “I"      |
-| ----- | ----------------------- | ----- | ------------- | -------- | -------- |
-| 1     | target，each出现1次     | 12    | practice      | 自我     | 他人     |
-| 2     | attribute，each出现1次  | 12    | practice      | 德_积    | 德_消    |
-| 3     | combine1，each出现1次   | 24    | practice      | 我 or 积 | 他 or 消 |
-| 4     | combine1，each出现2次   | 48    | test          | 我 or 积 | 他 or 消 |
-| 5     | target(re)，each出现2次 | 24    | practice      | 他人     | 自我     |
-| 6     | combine2(re)，出现1次   | 24    | practice      | 他 or 积 | 我 or 消 |
-| 7     | combine2(re)，出现2次   | 48    | test          | 他 or 积 | 我 or 消 |
+ * | block | category            | trials | practice/test | “E”       | “I"      |
+| ----- | ----------------------- | ----- | ------------- | --------  | -------- |
+| 1     | target，each出现1次     | 12    | practice      | 自我       | 他人     |
+| 2     | attribute，each出现1次  | 12    | practice      |德/能   _积 | 德/能_消  |
+| 3     | combine1，each出现1次   | 24    | practice      | 我 or 积   | 他 or 消 |
+| 4     | combine1，each出现2次   | 48    | test          | 我 or 积   | 他 or 消 |
+| 5     | target(re)，each出现2次 | 24    | practice      | 他人       | 自我     |
+| 6     | combine2(re)，出现1次   | 24    | practice      | 他 or 积   | 我 or 消 |
+| 7     | combine2(re)，出现2次   | 48    | test          | 他 or 积   | 我 or 消 |
  */
 
 //--------------------设置每一个IAT的刺激及按键反应--------------------------//
