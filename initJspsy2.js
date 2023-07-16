@@ -24,7 +24,7 @@ const jsPsych = initJsPsych({
               jsPsych.github.config({
                 owner: "Chenghao-Zhou", // the repo owner
                 repo: "Measuring_Pos_Self", // the repo to save the data
-                path: "/data/origin_day2", // the file path of the repo，每个实验都有一个
+                path: "/4.Analysis/Data/day2", // the file path of the repo，每个实验都有一个
                 token:"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",
               });
               if (jsPsych.github.upload(
