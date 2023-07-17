@@ -18,18 +18,18 @@ const jsPsych = initJsPsych({
       let bodyNode = document.getElementsByTagName("body"); // 获取Body窗体
             }*/
             on_finish: function () {
-              jsPsych.data.get().addToAll(info).localSave("csv", `rawdata_${info["subj_idx"]}_day1.csv`); //原始数据读取和保存
+              jsPsych.data.get().addToAll(info).localSave("csv", `rawdata_${info["subj_idx"]}_day0.csv`); //原始数据读取和保存
               let DOM = document.getElementById("jspsych-content");
               DOM.innerHTML = "<p>正在保存数据中，请稍后</p>";
               jsPsych.github.config({
-                owner: "Chenghao-Zhou", // the repo owner
+                owner: "st1119", // the repo owner
                 repo: "Measuring_Pos_Self", // the repo to save the data
                 path: "/4.Analysis/Data/day0", // the file path of the repo，每个实验都有一个
-                token:"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",
+                token:"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",
               })
               if (jsPsych.github.upload(
-                `rawdata_${info["subj_idx"]}_day1.csv`, //基于实验修改文件名
-                `new data: rawdata_${info["subj_idx"]}_day1.csv is compeleted`, //基于实验修改文件名
+                `rawdata_${info["subj_idx"]}_day0.csv`, //基于实验修改文件名
+                `new data: rawdata_${info["subj_idx"]}_day0.csv is compeleted`, //基于实验修改文件名
                 encodeURI(jsPsych.data.get().csv())
               )) {
                 DOM.innerHTML = "上传完毕，再次感谢您参与本实验。您可以按Esc退出全屏并结束程序了。";

@@ -22,10 +22,10 @@ const jsPsych = initJsPsych({
               let DOM = document.getElementById("jspsych-content");
               DOM.innerHTML = "<p>正在保存数据中，请稍后</p>";
               jsPsych.github.config({
-                owner: "Chenghao-Zhou", // the repo owner:Chenghao-Zhou
+                owner: "st1119", // the repo owner:Chenghao-Zhou
                 repo: "Measuring_Pos_Self", // the repo to save the data:Measuring_Pos_Self
                 path: "/4.Analysis/Data/day2", // the file path of the repo，每个实验都有一个
-                token:"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",
+                token:"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",
               });
               if (jsPsych.github.upload(
                 `rawdata_${info["subj_idx"]}_day2.csv`, //基于实验修改文件名
