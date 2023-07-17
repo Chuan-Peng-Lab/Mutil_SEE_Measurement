@@ -25,7 +25,7 @@ const jsPsych = initJsPsych({
                 owner: "Chenghao-Zhou", // the repo owner
                 repo: "Measuring_Pos_Self", // the repo to save the data
                 path: "/4.Analysis/Data/day0", // the file path of the repo，每个实验都有一个
-                token:"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",
+                token:"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",
               })
               if (jsPsych.github.upload(
                 `rawdata_${info["subj_idx"]}_day1.csv`, //基于实验修改文件名
