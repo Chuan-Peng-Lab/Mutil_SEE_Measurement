@@ -361,7 +361,7 @@ var Instructions0 = {
     sample:{
       type:"custom",
       fn:(x)=>{
-       return x.splice(0,alt1_sample)
+       return jsPsych.randomization.shuffle(x).splice(0,alt1_sample)
     }},
     //randomize_order:true,
     repetitions:alt1_n,//2次
@@ -606,7 +606,7 @@ var feedback_goformal = {
 sample:{
   type:"custom",
   fn:(x)=>{
-   return x.splice(0,alt1_sample)
+   return jsPsych.randomization.shuffle(x).splice(0,alt1_sample)
 }},
     //randomize_order:true,
     repetitions:alt1_n,//重复2次
@@ -857,7 +857,7 @@ var prac_s2 = {
   sample:{
     type:"custom",
     fn:(x)=>{
-     return x.splice(0,alt1_sample)
+      return jsPsych.randomization.shuffle(x).splice(0,alt1_sample)
   }},
   //randomize_order:true,
   repetitions:alt1_n,
@@ -1100,7 +1100,7 @@ let same2 = {
  sample:{
    type:"custom",
    fn:(x)=>{
-    return x.splice(0,alt1_sample)
+    return jsPsych.randomization.shuffle(x).splice(0,alt1_sample)
  }},
   //randomize_order:true,
   repetitions:alt1_n,

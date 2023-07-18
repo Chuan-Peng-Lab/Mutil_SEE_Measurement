@@ -134,7 +134,7 @@
     return array;
   }
   
-  var Q_math_sample = shuffle(Q_math).slice(0, 60);//随机抽取40个
+  var Q_math_sample = shuffle(Q_math).slice(0, 108);
   
 
 
@@ -534,12 +534,12 @@ for (var i = 0; i < EW_exercise_words.length; i++) {
 //-----------------------------------------------
 var EW_practice_instructions = {
   type: jsPsychHtmlButtonResponse,      
-  stimulus: `<div style="width:700px;">
+  stimulus:function() {return `<div style="width:700px;">
     <p style='color:white;font-size:45px; line-height:30px;'>词汇评估任务</p>
     <p style='color:white;font-size:25px; line-height:30px;'><b>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。</b></p>
     <p style='color:white;font-size:25px; line-height:30px;'>在本实验中，您将会看到一些形容词。</p>
     <p style='color:yellow;font-size:25px; line-height:30px;'>您的任务是判断这些形容词是否符合对您自己或您的朋友的描述。</p></div>`+
-    `符合按 ${key[0]} 键，不符合按 ${key[1]} 键`//fixme:此处按键始终为key[0]=f, key[1]=j
+    `符合按 ${key[0]} 键，不符合按 ${key[1]} 键`}//fixme:此处按键始终为key[0]=f, key[1]=j
     ,
   choices: ['继续'],
   data: {

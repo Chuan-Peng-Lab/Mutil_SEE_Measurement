@@ -46,6 +46,7 @@ var female_ability = ["强她", "弱她", ]
 var ability_f=self_ability.concat(female_ability)
 
 var key = ['f', 'j']//按键
+//var key =[['f','j'],['j','f']]
 //正确率60%
 let acc = 60;
 let view_texts_images = [];
@@ -417,7 +418,8 @@ var ALT2_Instructions0 = {
     sample:{
       type:"custom",
       fn:(x)=>{
-       return x.splice(0,alt2_sample)
+        return jsPsych.randomization.shuffle(x).splice(0,alt2_sample)
+       
     }},
     repetitions:alt2_n,
     on_finish:function(){
@@ -662,7 +664,7 @@ var feedback_goformal = {
     sample:{
       type:"custom",
       fn:(x)=>{
-       return x.splice(0,alt2_sample)
+       return jsPsych.randomization.shuffle(x).splice(0,alt2_sample)
     }},
     repetitions:alt2_n,//正是实验时改为6
     on_finish:function(){
@@ -917,7 +919,7 @@ var prac_s2 = {
   sample:{
     type:"custom",
     fn:(x)=>{
-     return x.splice(0,alt2_sample)
+     return jsPsych.randomization.shuffle(x).splice(0,alt2_sample)
   }},
   repetitions:alt2_n,
   on_finish:function(){
@@ -1160,7 +1162,7 @@ let same2 = {
   sample:{
     type:"custom",
     fn:(x)=>{
-     return x.splice(0,alt2_sample)
+      return jsPsych.randomization.shuffle(x).splice(0,alt2_sample)
   }},
   repetitions:alt2_n,//正是实验时改为6
   on_finish:function(){
