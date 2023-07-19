@@ -885,7 +885,7 @@ var Instruct_RJ2 = {
 
 var fixation = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: `<div style="color:white;font-size:40px;line-height:5px;position:absolute; transform: translate(-50%, -50%)">+</div>`,
+  stimulus: `<div style="color:white;font-size:80px;line-height:5px;position:absolute;top:calc(50%); transform: translate(-50%, -50%)">+</div>`,
   choices: "NO_KEYS",
   trial_duration: 500,
   
@@ -893,9 +893,8 @@ var fixation = {
 var RJ_formal1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function() {
-    var stim = '<div><p style="position: absolute; top:calc(50%);transform: translate(-50%, -50%);text-align: center; color: white; font-size: 40px;">'  + jsPsych.timelineVariable('Words', true) + '</p>' +
-    '<p style="position:absolute; text-align: center;font-size: 25px;top:calc(50% + 250px);transform: translate(-50%)">新词按 “1” ，熟悉按 “2” ，旧词按 “3”</p>' +
-    '</div>';
+    var stim = '<p style="position: absolute; top:calc(45%);;transform: translate(-50%, -50%);text-align: center; color: white; font-size: 60px;">'  + jsPsych.timelineVariable('Words', true) + '</p>' +
+    '<p style="position:absolute; text-align: center;font-size: 25px;top:calc(50% + 25%);transform: translate(-50%)">新词按 “1” ，熟悉按 “2” ，旧词按 “3”</p>' ;
 
 
       return stim;
@@ -929,7 +928,7 @@ var RJ_formal1 = {
 var RJ_formal2 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function() {
-    var stim = '<div><p style="position: absolute; top:calc(50%);transform: translate(-50%, -50%);text-align: center; color: white; font-size: 40px;">'  + jsPsych.timelineVariable('Words', true) + '</p>' +
+    var stim = '<div><p style="position: absolute; top:calc(45%);transform: translate(-50%, -50%);text-align: center; color: white; font-size: 60px;">'  + jsPsych.timelineVariable('Words', true) + '</p>' +
     '<p style="position:absolute; text-align: center;font-size: 25px;top:calc(50% + 250px);transform: translate(-50%)">自己按 “ F ” ，朋友按 “ J ”</p>' +
     '</div>';
       return stim;

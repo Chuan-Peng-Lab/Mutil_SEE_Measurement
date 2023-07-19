@@ -98,12 +98,9 @@
   timeline.push(selfesteem);
   timeline.push(coreself); 
   timeline.push(main_IAT);
-  timeline.push(rest_time);
+ 
   
-  timeline.push(preload);
-  timeline.push(Instructions0);//Instructions0 of ALT_1
-  timeline.push(ALT_1);
-
+  
   var rest_time = {
   type: jsPsychHtmlButtonResponse,
   stimulus: "<p style='color:white;'>现在是休息时间，当您结束休息后，您可以点击 结束休息 按钮 继续。</p>",
@@ -119,6 +116,11 @@
     
   }
 }; 
+  timeline.push(rest_time);
+  timeline.push(preload);
+  timeline.push(Instructions0);//Instructions0 of ALT_1
+  timeline.push(ALT_1);
+
   timeline.push(SGPS);
   timeline.push(NPI);
   timeline.push(hsns);

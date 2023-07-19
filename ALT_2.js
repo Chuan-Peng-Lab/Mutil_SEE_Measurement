@@ -95,7 +95,7 @@ var information = {
   },
    {
     type: jsPsychSurveyHtmlForm,
-    preamble: "<p style='color: white'>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。<br>后续实验中出现的 “朋友” 均指代这个朋友。</p>",
+    preamble: "<p style='color: white'>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。<br><br>后续实验中出现的 “朋友” 均指代这个朋友。</p>",
     html: `
       <p>1.该朋友的性别</p> 
       <input type="radio" name="Sex" value="0">男<br> 

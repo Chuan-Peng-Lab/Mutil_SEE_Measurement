@@ -88,7 +88,7 @@ var information = {
   }
 }, {
   type: jsPsychSurveyHtmlForm,
-  preamble: "<p style =' color : white'>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。<br>后续实验中出现的 “朋友” 均指代这个朋友。</p>",
+  preamble: "<p style =' color : white'>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。<br><br>后续实验中出现的 “朋友” 均指代这个朋友。</p>",
   html: `
       <p>1.该朋友的姓氏</p> 
       <input type="text" placeholder= '例如: 陈', name="friend_name" required><br>     
@@ -99,7 +99,7 @@ var information = {
   button_label: "继续",
   on_finish: function (data) {
     var response = data.response;
-    var subj_idx = "";
+    /*var subj_idx = "";
     var friend_name = "";
       response.forEach(function (item) {
         if (item.name === "subj_idx") {
@@ -107,7 +107,9 @@ var information = {
         } else if (item.name === "friend_name") {
           friend_name = item.value;
         }
-      });
+      });*/
+      var subj_idx = response["subj_idx"].trim();
+      var friend_name= response["friend_name"].trim();
     info["subj_idx"] = subj_idx;
     info["friend_name"] = friend_name; 
     key = permutation(key, 2)[parseInt(info["subj_idx"]) % 2] //对应的按键
