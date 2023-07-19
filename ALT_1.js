@@ -99,15 +99,8 @@ var information = {
   button_label: "继续",
   on_finish: function (data) {
     var response = data.response;
-    var subj_idx = "";
-    var friend_name = "";
-      response.forEach(function (item) {
-        if (item.name === "subj_idx") {
-          subj_idx = item.value;
-        } else if (item.name === "friend_name") {
-          friend_name = item.value;
-        }
-      });
+    var subj_idx = response["subj_idx"].trim();
+    var friend_name= response["friend_name"].trim();
     info["subj_idx"] = subj_idx;
     info["friend_name"] = friend_name; 
     key = permutation(key, 2)[parseInt(info["subj_idx"]) % 2] //对应的按键
