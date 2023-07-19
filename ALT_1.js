@@ -88,15 +88,28 @@ var information = {
   }
 }, {
   type: jsPsychSurveyHtmlForm,
-  preamble: "<p style =' color : white'>您的实验编号是</p>",
-  html: function () {
-    let data = localStorage.getItem(info["subj_idx"]) ? JSON.parse(localStorage.getItem(info["subj_idx"]))["Name"] : "";
-    return "<p><input name='Q0' type='text' value='" + data + "' required/></p>";
-  },
+  preamble: "<p style =' color : white'>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。<br>后续实验中出现的 “朋友” 均指代这个朋友。</p>",
+  html: `
+      <p>1.该朋友的姓氏</p> 
+      <input type="text" placeholder= '例如: 陈', name="friend_name" required><br>     
+      <p>2.您的实验编号是</p> 
+      <input type="text" name="subj_idx" required/><br> 
+  `,
 
   button_label: "继续",
   on_finish: function (data) {
-    info["subj_idx"] = data.response.Q0;
+    var response = data.response;
+    var subj_idx = "";
+    var friend_name = "";
+      response.forEach(function (item) {
+        if (item.name === "subj_idx") {
+          subj_idx = item.value;
+        } else if (item.name === "friend_name") {
+          friend_name = item.value;
+        }
+      });
+    info["subj_idx"] = subj_idx;
+    info["friend_name"] = friend_name; 
     key = permutation(key, 2)[parseInt(info["subj_idx"]) % 2] //对应的按键
 
     view_texts_images = [] //指导语中呈现的图片和文字对应关系

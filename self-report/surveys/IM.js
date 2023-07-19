@@ -63,7 +63,7 @@ var IM = {
     "False",
     
     ],
-    instructions: `<p style='color:white; font-size: 25px;line-height: 30px;'>以下条目是描述您在日常中的一些心理感受或做法，<br><br>请判断哪一等级的描述最符合您的实际情况，<br><br>1 代表 “完全不同意” ，4 代表 “不确定” ，7 代表 “非常同意”。<br></p>`,
+    instructions: `<p style='color:white; font-size: 25px;line-height: 25px;'>以下条目是描述您在日常中的一些心理感受或做法，<br><br>请判断哪一等级的描述最符合您的实际情况，<br><br>1 代表 “完全不同意” ，4 代表 “不确定” ，7 代表 “非常同意”。<br></p>`,
     scale_repeat: 10,
     survey_width: 950,
     item_width: 50,

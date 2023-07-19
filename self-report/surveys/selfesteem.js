@@ -59,7 +59,7 @@ var selfesteem = {
         "True",
     
     ],
-    instructions: '下面是一些关于我们对自己看法的句子，请根据你的真实情况作答，<br>其中1代表很不符合；2代表不符合；3代表符合；4代表非常符合。',
+    instructions: `<p><div style = "font-size: 25px">下面是一些关于我们对自己看法的句子，请根据你的真实情况作答，<br>其中 1 代表 “很不符合”； 2 代表 “不符合”； 3 代表 “符合”； 4 代表 “非常符合”。</div> </p>`,
     scale_repeat: 5,
     survey_width: 950,
     item_width: 50,

@@ -1,5 +1,5 @@
 /*人口统计学变量*/
-//  day1_Q1
+//  day0_Q1
 var gender_scale = ["A.男", "B.女"];
 var month_scale = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12"];
 var ethnicity_scale = ["汉族","蒙古族","回族","藏族","维吾尔族","苗族","彝族","壮族","布依族","朝鲜族","满族","侗族",
@@ -17,6 +17,11 @@ var occupation_scale = ["A.临时工、失业、待业人员、非技术及农�
     "E.职业高级管理人员与高级专业技术人员、专业主管人员,包括在党政、事业和社会团体机关单位中行使实际的行政管理职权的领导干部、大中型企业中非业主身份的高中层管理人员和私营企业主阶层,如公务员、公司经理、工头等"];
 var income_scale = ["A.无收入", "B.2000 元以下", "C.2000—5000 元", "D.5000—10000 元", "E.10000—30000 元", "F.30000—50000 元", "G.50000—100000 元",
     "H.100000—150000 元", "I.150000—200000元", "J.200000 元以上"];
+
+    const preload = {
+        type: jsPsychPreload,
+        images: 'img/ses.png',
+      }
 //问卷内容
 var demographics_1 = {
 
@@ -52,7 +57,7 @@ var demographics_1 = {
         d1 = ethnicity_scale.indexOf(responses.ethnicity);
         d2 = gender_scale.indexOf(responses.gender);
         //d3 = age_scale.indexOf(responses.age);
-        d3=responses.birthyear;
+        d3 = responses.birthyear;
         d4 = month_scale.indexOf(responses.birthmonth);
         d5 = edu_scale.indexOf(responses.selfEdu);d5 = edu2_scale.indexOf(responses.fatherEdu);
         d6 = edu_scale.indexOf(responses.selfEdu);d5 = edu2_scale.indexOf(responses.fatherEdu);
@@ -60,7 +65,7 @@ var demographics_1 = {
         d8 = occupation_scale.indexOf(responses.FatherOccupation);
         d9 = occupation_scale.indexOf(responses.MotherOccupation);
         //d9 = income_scale.indexOf(responses.income);
-        d10=responses.income;
+        d10 = responses.income;
         jsPsych.data.addProperties({
             民族: d1, 性别: d2, 出生年: d3, 出生月:d4,本人受教育程度: d5, 父亲受教育程度: d6, 母亲受教育程度: d7,
             父亲职业: d8, 母亲职业: d9,
@@ -108,11 +113,11 @@ var ses_block = {
     type: jsPsychSurveyLikert,
     questions: [
         {
-            prompt: `<div style='display: flex; justify-content: center; align-items: center;'><div style='text-align: center;'><img src='img/ses.png' style='display: block; margin: 0 auto;width: 400px; height: 400px;'></img><p>如上图所示，您所在家庭的社会经济地位假如有十个等级，<span style="color: red; font-size:18px">根据家庭客观条件来判断目前家庭在整个社会上处于什么水平？</span><br>最顶端 = 社会经济地位最高的家庭，最低端 = 社会经济地位水平最低的家庭。</p>`,
+            prompt: `<div style='display: flex; justify-content: center; align-items: center;'><div style='text-align: center;'><img src='img/ses.png' style='display: block; margin: 0 auto;width: 350px; height: 350px;'></img><p>如上图所示，您所在家庭的社会经济地位假如有十个等级，<span style="color: red; font-size:25px">根据家庭客观条件来判断目前家庭在整个社会上处于什么水平？</span><br>最顶端 = 社会经济地位最高的家庭，最低端 = 社会经济地位水平最低的家庭。</p>`,
             labels: ses_scale, required: true
         },
         {
-            prompt: ` <div style='display: flex; justify-content: center; align-items: center;'><div style='text-align: center;'><img src='img/ses.png' style='display: block; margin: 0 auto;width: 400px; height: 400px;'></img><p>如图所示，<span style="color: red; font-size:18px">如果您估计您的家庭社会经济地位相比周围的同学、朋友等而言，</span>与哪个阶层水平更高就选哪个数字等级，<br>例如：比大约 50%人群高，那么选第 5级，<br>若感觉处于最底层，就选第1级，类似的选出自己最合适的一级台阶。</p>`,
+            prompt: ` <div style='display: flex; justify-content: center; align-items: center;'><div style='text-align: center;'><img src='img/ses.png' style='display: block; margin: 0 auto;width: 350px; height: 350px;'></img><p>如图所示，<span style="color: red; font-size:25px">如果您估计您的家庭社会经济地位相比周围的同学、朋友等而言，</span>与哪个阶层水平更高就选哪个数字等级，<br>例如：比大约 50%人群高，那么选第 5级，<br>若感觉处于最底层，就选第1级，类似的选出自己最合适的一级台阶。</p>`,
             labels: ses_scale, required: true
         }
     ],

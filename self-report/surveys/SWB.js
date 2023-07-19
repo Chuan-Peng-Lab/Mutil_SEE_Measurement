@@ -44,7 +44,7 @@ var swb = {
     
     ],
 
-    instructions: `<p style='color:white; font-size: 25px;line-height: 30px;'>下面有一些句子，描述了您对自己生活的评价情况的。<br><br>请根据自己的真实情况选择最符合自己的选项，<br><br>1 代表 “非常不同意”，2 代表 “不同意”，3 代表 “有点不同意”，4 代表 “中立”，<br><br>5 代表 “有点同意”，6 代表 “同意”，7 代表 “非常同意”。</p>`,
+    instructions: `<p style='color:white; font-size: 25px;line-height: 25px;'>下面有一些句子，描述了您对自己生活的评价情况的。<br><br>请根据自己的真实情况选择最符合自己的选项，<br><br>1 代表 “非常不同意”，2 代表 “不同意”，3 代表 “有点不同意”，4 代表 “中立”，<br><br>5 代表 “有点同意”，6 代表 “同意”，7 代表 “非常同意”。</p>`,
     scale_repeat: 5,
     survey_width: 950,
     item_width: 50,

@@ -14,7 +14,7 @@ document.head.innerHTML +=
     .tag-left { font-size: 24pt; position: absolute; top: 15%; left: 25%; }
     .tag-right { font-size: 24pt; position: absolute; top: 15%; right: 25%; }
     .tag-bottom { font-size: 20pt; position: absolute; bottom: 5%; left: 0; right: 0; }
-    </style>`
+    </style>`  
 
 // HTML DOM styles (by using JS function alone or in jsPsych 'on_start', 'on_load', 'on_finish' parameters)
 function set_html_style() {
@@ -233,7 +233,9 @@ var IAT_instr0 = {
     </table><br/>`,
     choices: ['<span id="timer">10</span>秒后继续'],
     button_html: btn_html_timer,
-    on_finish: set_html_style_iat
+    on_finish:function(){ 
+        set_html_style_iat;
+    $("body").css("cursor", "default");}
 }
 
 
@@ -721,7 +723,7 @@ var debrief_IAT = {
       
       return `
       <p style="text-align: left">
-        <b>按空格键继续实验</b><br/></p>
+        <b>现在是休息时间，当您结束休息后，您可以点击 空格键 继续实验。</b><br/></p>
         `  
     },
     on_finish: function(data) {
@@ -1157,7 +1159,7 @@ var debrief_IAT2 = {
         IAT_results2.IAT_D_test2= IAT_D_test2
 
         return ` <p style="text-align: left">
-        <b>按空格键继续实验</b><br/></p>
+        <b>现在是休息时间，当您结束休息后，您可以点击 空格键 继续实验。</b><br/></p>
        `
     },
     on_finish: function(data) {

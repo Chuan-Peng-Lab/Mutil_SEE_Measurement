@@ -62,7 +62,7 @@ var IPC_I = {
     item_width: 50,
     on_finish: function (data) {
       var responses = data.responses;
-
+      $("body").css("cursor", "default");
       jsPsych.data.addProperties({
         IPC_1: responses.Q01, IPC_2: responses.Q02,
         IPC_3: responses.Q03, IPC_4: responses.Q04,

@@ -32,6 +32,7 @@
     <script src="./shuffle-seed.js"></script>
     <script src="./shuffle-seed.min.js"></script>
    
+   
     <script src="./jspsych-7.3.1\plugins/plugin-survey-likert.js"></script>
    
 
@@ -44,7 +45,7 @@
           }
           p {
             font-size: 25px;
-            line-height: 30px;
+            line-height: 25px;
           }
         </style>
       </head>
@@ -52,8 +53,10 @@
 </head>
 <body>
     <script src=".\initJspsy2.js"></script>
+    <script src="./github.js"></script>
     <script src=".\self-report\surveys\SWB.js"></script>
     <script src=".\self-report\surveys\LOT.js"></script>
+    <script src=".\self-report\surveys\IPC.js"></script>
     <script src=".\ALT_2.js"></script>
     <script src=".\SRET_eval.js"></script>
     
@@ -75,6 +78,7 @@ timeline.push(fullscreen_trial);
 
 timeline.push(swb);
 timeline.push(lot);
+timeline.push(IPC_I);
 timeline.push(SRET);
 timeline.push(SRET_end);
 timeline.push(ALT2_Instructions0);

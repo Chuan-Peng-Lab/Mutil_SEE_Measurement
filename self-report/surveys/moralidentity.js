@@ -58,7 +58,7 @@ var moralidentity = {
         "False",
     
     ],
-    instructions: `<p style='color:white; font-size: 25px;line-height: 30px;'>下列词语是用来描述一个人的特征的：</p><br> <p style='color:white; font-size: 25px;line-height: 30px;'>关心他人的、富有同情心的、公平的、友好的、慷慨的、乐于助人的、勤奋的、诚实的、善良的,<br>拥有这些品质的人可能是你，也可能是他人。现在在你的头脑中想象这样一个人，想像这个人怎么思考、生活和行为。<br>当在脑海中对他（她）有一个栩栩如生的形象时，回答下列问题。<br>（1：非常不符合；2：不太符合；3: 不确定； 4比较符合；5；非常符合）</p>`,
+    instructions: `<p style='color:white; font-size: 25px;line-height: 25px;'>下列词语是用来描述一个人的特征的：</p><br> <p style='color:white; font-size: 25px;line-height: 25px;'>关心他人的、富有同情心的、公平的、友好的、慷慨的、乐于助人的、勤奋的、诚实的、善良的,<br>拥有这些品质的人可能是你，也可能是他人。现在在你的头脑中想象这样一个人，想像这个人怎么思考、生活和行为。<br>当在脑海中对他（她）有一个栩栩如生的形象时，回答下列问题。<br>（1：非常不符合；2：不太符合；3: 不确定； 4比较符合；5；非常符合）</p>`,
     scale_repeat: 5,
     survey_width: 950,
     item_width: 50,

@@ -38,6 +38,7 @@
      <script src="./jspsych-7.3.1\plugins/plugin-video-keyboard-response.js"></script>
      <script src="./jspsych-7.3.1/plugins/plugin-preload.js"></script>  
      <script src="./jspsych-7.3.1\plugins/plugin-video-slider-response.js"></script>
+     <script src="./jspsych-7.3.1\plugins/plugin-resize.js"></script>
      <script src="./jspsych-7.3.1/plugins/plugin-fullscreen.js"></script>
     <script src="./jspsych-7.3.1/plugins/plugin-call-function.js"></script>
     <script src="./jspsych-7.3.1/plugins/plugin-virtual-chinrest.js"></script>
@@ -51,25 +52,26 @@
     <script src="./jspsych-7.3.1/js/jSignature/jSignature.min.js"></script>
     <script src="./shuffle-seed.js"></script>
     <script src="./shuffle-seed.min.js"></script>
-    <script src="./github.js"></script>
+   
     <head>
         <style>
           body {
             background-color: rgb(128, 128, 128);  /*背景灰色*/
             color: white;
-            font-size: 32px;
+            font-size: 25px;
           }
           p {
             font-size: 25px;
-            line-height: 30px;
-          }
-        </style>
-      </head>
+            line-height: 25px;
+          }  
+        </style>       
+      </head>   
 </head>
 <body>
 
     <!-- Load template experiment -->
     <script src="./initJspsy.js"></script>
+    <script src="./github.js"></script>
     <script src="./iat_demo.js"></script>
     <script src="./self-report/surveys/selfesteem.js"></script>
     <script src="./self-report/surveys/coreself.js"></script>   
@@ -77,6 +79,7 @@
     <script src="./self-report/surveys/NPI.js"></script>
     <script src="./self-report/surveys/hsns.js"></script>
     <script src="./self-report/surveys/SGPS.js"></script>
+    
      
 </body>
 
@@ -90,17 +93,17 @@
   timeline.push(welcome);
 
   timeline.push(information);
-  
+  //timeline.push(chinrest);
+  timeline.push(open_fullscreen);
   timeline.push(selfesteem);
   timeline.push(coreself); 
-  timeline.push(open_fullscreen);
+  timeline.push(main_IAT);
+  timeline.push(rest_time);
+  
   timeline.push(preload);
- // timeline.push(chinrest);
-  //timeline.push(fullscreen_trial);
   timeline.push(Instructions0);//Instructions0 of ALT_1
   timeline.push(ALT_1);
 
- 
   var rest_time = {
   type: jsPsychHtmlButtonResponse,
   stimulus: "<p style='color:white;'>现在是休息时间，当您结束休息后，您可以点击 结束休息 按钮 继续。</p>",
@@ -112,11 +115,10 @@
   },
   on_finish: function(data) {
     end_time = new Date()
+    $("body").css("cursor", "default");
     
   }
-};
-  timeline.push(rest_time);
-  timeline.push(main_IAT);
+}; 
   timeline.push(SGPS);
   timeline.push(NPI);
   timeline.push(hsns);

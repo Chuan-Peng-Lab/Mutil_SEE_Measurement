@@ -57,7 +57,7 @@ var phq = {
         "False",
     
     ],
-    instructions: '在过去两个星期，有多少时候您被以下问题所困扰，请在数字上圈选，<br>0 代表"完全不会"，1 代表"好几天"，2 代表"一半以上的天数"，3 代表"几乎每天"。',
+    instructions: `<p><div style = "font-size: 25px">在过去两个星期，有多少时候您被以下问题所困扰，请在数字上圈选，<br>0 代表"完全不会"，1 代表"好几天"，2 代表"一半以上的天数"，3 代表"几乎每天"。</div> </p>`,
     scale_repeat: 5,
     survey_width: 950,
     item_width: 50,

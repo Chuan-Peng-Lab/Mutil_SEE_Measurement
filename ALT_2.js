@@ -95,13 +95,14 @@ var information = {
   },
    {
     type: jsPsychSurveyHtmlForm,
-    preamble: "<p style='color: white'>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。</p>",
+    preamble: "<p style='color: white'>请回忆某一个亲密的朋友，你们至少2年前就认识了，并且最近2年经常见面。<br>后续实验中出现的 “朋友” 均指代这个朋友。</p>",
     html: `
-      <p>该朋友的性别</p> 
+      <p>1.该朋友的性别</p> 
       <input type="radio" name="Sex" value="0">男<br> 
       <input type="radio" name="Sex" value="1">女<br> 
-     
-      <p>您的实验编号是</p> 
+      <p>2.该朋友的姓氏</p> 
+      <input type="text" placeholder= '例如: 陈',name="friend_name" required><br>  
+      <p>3.您的实验编号是</p> 
       <input type="text" name="subj_idx" required/><br> 
     `,//收集被试编号以及朋友的性别
    
@@ -111,18 +112,22 @@ var information = {
       var response = data.response;
       var subj_idx = "";
       var sex = "";
+      var friend_name = "";
       response.forEach(function (item) {
         if (item.name === "subj_idx") {
           subj_idx = item.value;
         } else if (item.name === "Sex") {
           sex = item.value;
+        }else if (item.name === "friend_name") {
+          friend_name = item.value;
         }
       });
 
      //将response[{"name":"Sex","value":"1"},{"name":"subj_idx","value":"34"}]内value提取，并储存至info
      
       info["Sex"] = sex == 0 ? "Male" : "Female";//将性别转为female，male
-      info["subj_idx"] = subj_idx;   
+      info["subj_idx"] = subj_idx;
+      info["friend_name"] = friend_name;   
       key = permutation(key, 2)[parseInt(info["subj_idx"]) % 2] ; //平衡按键f,j
 
       view_texts_images = [];
@@ -227,9 +232,26 @@ var chinrest = {
   var fullscreen_trial = {
     type: jsPsychFullscreen,
     fullscreen_mode: true,
-    message: "<p><span class='add_' style='color:white; font-size: 25px;'> 实验需要全屏模式，实验期间请勿退出全屏。 </span></p >",
-    button_label: " <span class='add_' style='color:black; font-size: 20px;'> 点击这里进入全屏</span>"
-  }
+    data: {
+      user_agent:navigator.userAgentData,
+    },
+    message: `
+    <p style="font: 16pt 微软雅黑; text-align: left; line-height: 1.6em">
+    <b>
+    测验将在一个「全屏页面」开始，为确保最佳效果，请你：<br/>
+    （1）在电脑上进行测验，并使用主流浏览器打开本网页<br/>
+    &emsp;&emsp;（Chrome、Edge、Firefox、Safari等，不要用IE）<br/>
+    （2）开始前，请将输入法切换为英文状态<br/>
+    （3）关掉电脑上其他正在运行的程序或将其最小化<br/>
+    （4）将手机调至静音，并尽可能减少环境噪音干扰<br/>
+    （5）在测验过程中不要退出全屏<br/>
+    （6）务必认真作答<br/><br/>
+    </b>
+    如果你同意参与，并且清楚理解了上述要求，请点击开始：
+    </p>`,
+    button_label: '点击这里全屏开始',
+    delay_after: 100
+}
 
 //timeline.push(fullscreen_trial);//将全屏设置放入到时间线里
 

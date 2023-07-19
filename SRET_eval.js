@@ -137,7 +137,7 @@
   var Q_math_sample = shuffle(Q_math).slice(0, 108);
   
 
-
+//160 for formal analysis
 var all_words = [
   { Words: "能干", Domain: "ability", Valence: "Positive" },
   { Words: "上进", Domain: "ability", Valence: "Positive" },

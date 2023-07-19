@@ -21,7 +21,7 @@ var moralSeImag9_scale = ["1<br>远没有达到我想达到的善良程度", "2"
 //问卷设问
 var moralSeImag_block1 = {
     type:  jsPsychSurveyLikert,
-    preamble: "<p style='color:white; font-size: 25px;line-height: 30px;'>请对下列关于你的陈述进行判断。</p>",
+    preamble: "<p style='color:white; font-size: 25px;line-height: 25px;'>请对下列关于你的陈述进行判断。</p>",
     questions:  [
         {  prompt: " 1. 与我想成为的一个关爱他人的人相比，我现在", labels: moralSeImag1_scale, required: true },
         {  prompt: " 2. 与我想成为的一个有同情心的人相比，我现在", labels: moralSeImag2_scale, required: true },
@@ -35,7 +35,7 @@ var moralSeImag_block1 = {
    
     on_finish: function (data) {
         var responses = data.response;
-
+        $("body").css("cursor", "default");
         jsPsych.data.addProperties({
             moralSeImag_1: responses.Q0, moralSeImag_2: responses.Q1, moralSeImag_3: responses.Q2,
             moralSeImag_4: responses.Q3, moralSeImag_5: responses.Q4,
@@ -45,7 +45,7 @@ var moralSeImag_block1 = {
 }
 var moralSeImag_block2 = {
     type:  jsPsychSurveyLikert,
-    preamble: "<style='color:white; font-size: 25px;line-height: 30px;'>请对下列关于你的陈述进行判断。</p>",
+    preamble: "<style='color:white; font-size: 25px;line-height: 25px;'>请对下列关于你的陈述进行判断。</p>",
     questions: [
         {  prompt: " 6. 与我想成为的一个努力工作的人相比，我现在", labels: moralSeImag6_scale, required: true },
         {  prompt: " 7. 与我想成为的一个乐于助人的人相比，我现在", labels: moralSeImag7_scale, required: true },
@@ -59,7 +59,7 @@ var moralSeImag_block2 = {
            show_clickable_nav: true,
     on_finish: function (data) {
         var responses = data.response;
-        $("body").css("cursor", "default");
+        
         jsPsych.data.addProperties({
             moralSeImag_6: responses.Q0, moralSeImag_7: responses.Q1,
             moralSeImag_8: responses.Q2, moralSeImag_9: responses.Q3
