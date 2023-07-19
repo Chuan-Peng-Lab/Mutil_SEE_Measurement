@@ -56,7 +56,7 @@ var IPC_I = {
         "False",
     
     ],
-    instructions: '以下条目是描述您在日常中的一些心理感受或做法，请判断哪一等级的描述最符合您的实际情况。',
+    instructions: `<p style='color:white; font-size: 25px;line-height: 25px;'>以下条目是描述您在日常中的一些心理感受或做法，请判断哪一等级的描述最符合您的实际情况。</p>`,
     scale_repeat: 6,
     survey_width: 950,
     item_width: 50,
